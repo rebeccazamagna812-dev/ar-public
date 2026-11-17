@@ -1,25 +1,31 @@
-<dsc-progress label="Etapa 2 de 3" [value]="67" />
-
-<div class="pagina__cabecalho">
-  <h1 class="pagina__titulo">Confira seus dados</h1>
-</div>
-
-<p class="pagina__subtitulo">
-  Os dados abaixo foram obtidos automaticamente do IntegraMais (RH). Confira antes de continuar.
-</p>
+<dsc-title-bar
+  title="Confira seus dados"
+  subtitle="Os dados foram obtidos automaticamente do IntegraMais (RH). Confira antes de continuar."
+>
+  <a
+    dscTitleBarAction
+    dscButton
+    appearance="chromeless"
+    iconLeft="arrow-left"
+    [routerLink]="voltar().url"
+    [queryParams]="voltar().query"
+  >
+    Voltar
+  </a>
+  <a dscTitleBarAction dscButton appearance="chromeless" iconLeft="home" routerLink="/">Página principal</a>
+</dsc-title-bar>
 
 <section class="dados" aria-label="Dados cadastrais" [attr.aria-busy]="carregando()">
   @if (dados(); as d) {
     <dsc-text-field-form label="Nome completo" state="read-only" [value]="d.nomeCompleto" />
     <dsc-text-field-form label="CPF" state="read-only" [value]="d.cpf | mascaraCpf" />
     <dsc-text-field-form label="Matrícula" state="read-only" [value]="d.matricula" />
-    <dsc-text-field-form label="Documento de Identidade" state="read-only" [value]="d.documentoIdentidade" />
-    <dsc-text-field-form label="E-mail corporativo" state="read-only" [value]="d.emailCorporativo" />
     <dsc-text-field-form
       label="Data de Nascimento"
       state="read-only"
       [value]="d.dataNascimento | date: 'dd/MM/yyyy' : 'UTC'"
     />
+    <dsc-text-field-form label="E-mail corporativo" state="read-only" [value]="d.emailCorporativo" />
   } @else if (erroCarregamento()) {
     <!-- [PADRÃO DE MERCADO] Estado de erro de carregamento: não há tela no Figma. -->
     <dsc-card-alert class="dados__erro" variant="danger" title="Não foi possível carregar seus dados">
@@ -28,10 +34,10 @@
   }
 </section>
 
-<dsc-card-alert title="Importante">Se algum dado estiver incorreto, atualize-o no Portal IntegraMais.</dsc-card-alert>
+<dsc-card-alert title="Conferência cadastral">{{ textos().conferencia }}</dsc-card-alert>
+<dsc-card-alert [title]="textos().alerta.titulo">{{ textos().alerta.texto }}</dsc-card-alert>
 
-<div class="pagina__acoes">
-  <button dscButton type="button" appearance="outline" (click)="voltar()">Voltar</button>
+<div class="pagina__acoes pagina__acoes--apos-conteudo">
   <button
     dscButton
     type="button"

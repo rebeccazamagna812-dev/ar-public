@@ -38,6 +38,10 @@ export const DSC_ICONS = {
     viewBox: '0 0 20 20',
     body: stroke('M5 7.5L10 12.5L15 7.5', 1.25),
   },
+  'arrow-left': {
+    viewBox: '0 0 20 20',
+    body: stroke('M15.8333 10H4.16663M4.16663 10L9.16663 5M4.16663 10L9.16663 15', 1.25),
+  },
   'nav-arrow-right': {
     viewBox: '0 0 20 20',
     body: stroke('M7.5 5L12.5 10L7.5 15', 1.25),

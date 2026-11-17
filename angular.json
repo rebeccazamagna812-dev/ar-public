@@ -39,7 +39,8 @@
             ],
             "styles": [
               "projects/dsc-web-local/styles/dsc-web.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/shared/styles/pagina.css"
             ]
           },
           "configurations": {
@@ -92,6 +93,7 @@
           "options": {
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
+            "include": ["**/*.spec.ts", "../projects/**/*.spec.ts"],
             "assets": [
               {
                 "glob": "**/*",
@@ -100,7 +102,8 @@
             ],
             "styles": [
               "projects/dsc-web-local/styles/dsc-web.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/shared/styles/pagina.css"
             ]
           }
         },

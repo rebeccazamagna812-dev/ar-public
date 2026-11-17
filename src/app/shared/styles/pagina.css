@@ -1,9 +1,12 @@
 /*
  * Estrutura comum das páginas dentro da área de conteúdo.
  * [FIGMA: frame "Conteúdo" — auto layout vertical, gap 20, ações fixadas no rodapé por um Spacer]
- * Importado por cada página via `styleUrls`.
+ *
+ * Estilo GLOBAL (angular.json → styles). Cada página roteada declara `host: { class: 'pagina' }` e usa as
+ * classes `pagina__*` no template. É global, e não um componente <app-pagina>, porque o CSS encapsulado de um
+ * componente não alcança o conteúdo projetado nem o elemento host da rota, que precisa ocupar a altura toda.
  */
-:host {
+.pagina {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -69,6 +72,19 @@
   gap: var(--dsc-spacing-nano);
   margin-top: auto;
   padding-top: var(--dsc-spacing-smaller);
+}
+
+/* Ações logo depois do conteúdo, e não fixadas no rodapé [FIGMA: seção 03 — 03.01, 03.02, 03.N1…] */
+.pagina__acoes--apos-conteudo {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Bloco de texto com título de seção [FIGMA: [dsc] Text style=title, size=small, emphasis=true + body standard] */
+.pagina__secao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dsc-spacing-micro);
 }
 
 @media (max-width: 767px) {
