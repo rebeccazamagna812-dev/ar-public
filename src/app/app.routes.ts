@@ -9,7 +9,7 @@ function placeholder(rota: string, titulo: string, origem: string): Route {
     path: rota.replace(/^\//, ''),
     title: titulo,
     data: { titulo, origem },
-    loadComponent: () => import('@features/placeholder/placeholder').then((m) => m.Placeholder),
+    loadComponent: () => import('@shared/paginas/placeholder/placeholder').then((m) => m.Placeholder),
   };
 }
 

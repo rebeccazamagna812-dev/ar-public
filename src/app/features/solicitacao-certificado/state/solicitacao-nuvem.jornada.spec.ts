@@ -35,13 +35,13 @@ describe('SolicitacaoNuvemJornada', () => {
   describe('verificarEntradaNuvem', () => {
     it('leva a 01.E1 quando não é elegível', async () => {
       const jornada = criar({ elegivel: false });
-      expect(await firstValueFrom(jornada.verificarEntradaNuvem())).toBe('/solicitar/nuvem/indisponivel/nao-elegivel');
+      expect(await firstValueFrom(jornada.verificarEntradaNuvem())).toBe('/solicitar/nuvem/interrompida/nao-elegivel');
     });
 
     it('leva a 01.E2 quando já existe certificado ativo', async () => {
       const jornada = criar({ ativo: of(true) });
       expect(await firstValueFrom(jornada.verificarEntradaNuvem())).toBe(
-        '/solicitar/nuvem/indisponivel/certificado-ativo',
+        '/solicitar/nuvem/interrompida/certificado-ativo',
       );
     });
 
@@ -66,13 +66,13 @@ describe('SolicitacaoNuvemJornada', () => {
 
     it('leva a 01.E3 na divergência cadastral, sem registrar', async () => {
       const jornada = criar({ envio: of({ tipo: 'interrompida', motivo: 'divergencia-cadastral' }) });
-      expect(await firstValueFrom(jornada.confirmar())).toBe('/solicitar/nuvem/indisponivel/divergencia-cadastral');
+      expect(await firstValueFrom(jornada.confirmar())).toBe('/solicitar/nuvem/interrompida/divergencia-cadastral');
       expect(jornada.solicitacao()).toBeNull();
     });
 
     it('leva a 01.E4 em falha técnica, sem registrar', async () => {
       const jornada = criar({ envio: throwError(() => new Error('timeout')) });
-      expect(await firstValueFrom(jornada.confirmar())).toBe('/solicitar/nuvem/indisponivel/serpro-indisponivel');
+      expect(await firstValueFrom(jornada.confirmar())).toBe('/solicitar/nuvem/interrompida/serpro-indisponivel');
       expect(jornada.solicitacao()).toBeNull();
     });
   });

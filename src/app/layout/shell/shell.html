@@ -15,6 +15,8 @@
 
   @if (usuario(); as u) {
     <div dscHeaderAccount class="shell__conta">
+      <!-- O conteúdo do botão (nome, perfil, matrícula) é renderizado pelo template do dscAccountSelect. -->
+      <!-- eslint-disable-next-line @angular-eslint/template/elements-content -->
       <button
         #botaoConta
         dscAccountSelect
@@ -38,7 +40,6 @@
 
 @if (menuAberto()) {
   <!-- Fundo clicável para fechar com o mouse; pelo teclado, o menu fecha com Esc. -->
-  <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
   <div class="shell__overlay" (click)="fecharPaineis()" aria-hidden="true"></div>
   <dsc-sidebar-menu #menu id="menu-principal" class="shell__menu">
     @for (item of itens; track item.rota) {

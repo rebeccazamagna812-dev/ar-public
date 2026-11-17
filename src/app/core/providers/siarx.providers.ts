@@ -2,8 +2,8 @@ import { EnvironmentProviders, Provider, inject, provideAppInitializer } from '@
 import { AutenticacaoService } from '@core/auth/autenticacao.service';
 import { ElegibilidadeService } from '@domain/certificado/elegibilidade.service';
 import { SolicitacaoCertificadoApi } from '@domain/certificado/solicitacao-certificado.api';
-import { AutenticacaoMockService } from '@mocks/autenticacao.mock.service';
-import { SolicitacaoCertificadoMockApi } from '@mocks/solicitacao-certificado.mock-api';
+import { AutenticacaoMockService } from '@mocks/autenticacao.mock';
+import { SolicitacaoCertificadoMockApi } from '@mocks/solicitacao-certificado-api.mock';
 
 /**
  * Implementações dos contratos de backend e de autenticação [ADR-06].

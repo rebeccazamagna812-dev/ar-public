@@ -81,3 +81,9 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
   - foco visível com o token de foco do DSC;
   - regras de acessibilidade do angular-eslint.
 - **Origem:** `[DOC: RNF04]` (norma e nível `[PENDENTE]`); `[PADRÃO DE MERCADO]`.
+
+## ADR-13 — Fronteiras entre camadas verificadas pelo lint
+- **Contexto:** sem verificação, features passam a importar umas das outras e `shared/` passa a depender do negócio, o que acopla o código aos poucos.
+- **Decisão:** regras `no-restricted-imports` por pasta em `eslint.config.js` (tabela no README → "Fronteiras entre camadas"). Telas genéricas reutilizadas por várias rotas, como o placeholder, ficam em `shared/paginas/`.
+- **Descartadas:** `eslint-plugin-boundaries` (dependência extra para um conjunto pequeno de regras); só convenção escrita (não impede regressão).
+- **Origem:** `[PADRÃO DE MERCADO]`.

@@ -37,14 +37,14 @@ describe('jornadaNuvemGuard', () => {
   it('redireciona para "não elegível" quando o empregado não pode solicitar nuvem', async () => {
     configurar({ elegivel: false, ativo: false });
     const resultado = await executar();
-    expect(resultado instanceof UrlTree && resultado.toString()).toBe('/solicitar/nuvem/indisponivel/nao-elegivel');
+    expect(resultado instanceof UrlTree && resultado.toString()).toBe('/solicitar/nuvem/interrompida/nao-elegivel');
   });
 
   it('redireciona para "certificado ativo" quando já existe certificado em nuvem ativo', async () => {
     configurar({ elegivel: true, ativo: true });
     const resultado = await executar();
     expect(resultado instanceof UrlTree && resultado.toString()).toBe(
-      '/solicitar/nuvem/indisponivel/certificado-ativo',
+      '/solicitar/nuvem/interrompida/certificado-ativo',
     );
   });
 

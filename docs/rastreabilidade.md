@@ -33,7 +33,7 @@
 | Sem dados sensíveis em log | `core/erros/*`, `core/http/*` | `[DOC: RNF01]` |
 | Locale pt-BR | `app.config.ts` | diretriz do projeto |
 | Título da aba, foco na navegação, skip link | `core/navegacao/siarx-title-strategy.ts`, `shell.*` | `[PADRÃO DE MERCADO]` |
-| Placeholders das demais funcionalidades | `navegacao.ts` (`emConstrucao`, `PAGINAS_FORA_DO_MENU`) → `app.routes.ts`, `features/placeholder` | `[FIGMA: seções 00.02, 04–10]` |
+| Placeholders das demais funcionalidades | `navegacao.ts` (`emConstrucao`, `PAGINAS_FORA_DO_MENU`) → `app.routes.ts`, `shared/paginas/placeholder` | `[FIGMA: seções 00.02, 04–10]` |
 | Página não encontrada | `features/nao-encontrado` | `[PADRÃO DE MERCADO]` |
 | Erro ao carregar dados / elegibilidade | `conferir-dados.html`, `escolher-modalidade.html` | `[PADRÃO DE MERCADO]` (sem tela no Figma) |
 

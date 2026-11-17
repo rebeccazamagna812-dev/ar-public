@@ -5,7 +5,7 @@ import { DadosCadastrais, Elegibilidade, ResultadoEnvioSolicitacao } from './sol
  * Contrato de acesso ao backend do SIARX para a jornada de solicitação.
  *
  * É uma classe abstrata usada como token de injeção: as telas dependem só deste contrato.
- * Hoje a implementação registrada é a simulada (src/app/mocks/solicitacao-certificado.mock-api.ts).
+ * Hoje a implementação registrada é a simulada (src/app/mocks/solicitacao-certificado-api.mock.ts).
  *
  * [PENDENTE] Endpoints, formato de erro e paginação do backend não estão definidos na documentação.
  * Quando estiverem, crie uma implementação HTTP (ex.: solicitacao-certificado.http-api.ts) e troque o provider

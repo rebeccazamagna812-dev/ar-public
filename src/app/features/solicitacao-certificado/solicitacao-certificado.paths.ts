@@ -11,7 +11,7 @@ export const SEGMENTO_SOLICITACAO = 'solicitar';
 export const SEGMENTOS_SOLICITACAO = {
   dadosNuvem: 'nuvem/dados',
   enviada: 'nuvem/enviada',
-  interrupcao: 'nuvem/indisponivel',
+  interrupcao: 'nuvem/interrompida',
   midiaFisica: 'midia-fisica',
 } as const;
 

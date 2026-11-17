@@ -17,7 +17,7 @@ const tituloInterrupcao: ResolveFn<string> = (route) => {
  *   /solicitar                               01.01 / 01.01A  Escolher modalidade (etapa 1 de 3)
  *   /solicitar/nuvem/dados                   01.02           Confira seus dados (etapa 2 de 3) + envio
  *   /solicitar/nuvem/enviada                 01.04           Solicitação enviada
- *   /solicitar/nuvem/indisponivel/:motivo    01.E1–01.E4     Interrupções da jornada
+ *   /solicitar/nuvem/interrompida/:motivo    01.E1–01.E4     Interrupções da jornada (não elegível, ativo, divergência, SERPRO)
  * A tela 01.03 (Revisar e confirmar) está esmaecida (12%) no Figma e o protótipo vai de 01.02 direto para 01.04.
  * Por isso ela não foi implementada [FIGMA: 01.03, opacidade 0.12; interação "Confirmar solicitação" → 01.04].
  *
@@ -54,7 +54,7 @@ const PAGINAS: Routes = [
     path: SEGMENTOS_SOLICITACAO.midiaFisica,
     title: 'Solicitar certificado em mídia física',
     data: { titulo: 'Solicitar certificado em mídia física', origem: 'FIGMA: seção 02' },
-    loadComponent: () => import('@features/placeholder/placeholder').then((m) => m.Placeholder),
+    loadComponent: () => import('@shared/paginas/placeholder/placeholder').then((m) => m.Placeholder),
   },
 ];
 
