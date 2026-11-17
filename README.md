@@ -145,7 +145,7 @@ A biblioteca oficial só é acessível pela intranet. Para trocar:
 
 Componentes da cópia local: Icon, Brand Symbol, Button, Icon Button, Progress, Card Alert, Card (+ Header/Body),
 Separator, Radio, Text Field Form, Label Value Pair, Illustration, State Message, Header, Footer, Account Select,
-Dropdown (+ Item), Sidebar Menu (+ Item).
+Dropdown (+ Item), Sidebar Menu (+ Item), Title Bar, Modal, List Item.
 
 > As **ilustrações** (Success/Warning/Error) são imagens no DSC. Na cópia local foram redesenhadas em SVG, de forma aproximada.
 > A fonte **CAIXA Std** não está incluída; sem ela, o navegador usa Roboto/Arial.

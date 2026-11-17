@@ -3,11 +3,11 @@ import { DscProgress } from './progress';
 
 /** Teste de exemplo da camada de componente (cópia local do DSC). */
 describe('DscProgress', () => {
-  it('exibe o rótulo, o percentual e os atributos de acessibilidade', async () => {
+  it('exibe o rótulo, o percentual e os atributos de acessibilidade', () => {
     const fixture = TestBed.createComponent(DscProgress);
     fixture.componentRef.setInput('label', 'Etapa 2 de 3');
     fixture.componentRef.setInput('value', 67);
-    await fixture.whenStable();
+    fixture.detectChanges();
 
     const host: HTMLElement = fixture.nativeElement;
     expect(host.getAttribute('role')).toBe('progressbar');
@@ -16,11 +16,11 @@ describe('DscProgress', () => {
     expect(host.textContent).toContain('67%');
   });
 
-  it('limita o valor entre 0 e 100', async () => {
+  it('limita o valor entre 0 e 100', () => {
     const fixture = TestBed.createComponent(DscProgress);
     fixture.componentRef.setInput('label', 'Concluído');
     fixture.componentRef.setInput('value', 150);
-    await fixture.whenStable();
+    fixture.detectChanges();
 
     expect(fixture.nativeElement.getAttribute('aria-valuenow')).toBe('100');
   });

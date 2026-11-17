@@ -92,6 +92,8 @@
   --dsc-color-fixed-highlight: #005ca9;
   --dsc-color-fixed-on-highlight: #ffffff;
   --dsc-color-fixed-accent: #d87b00;
+  /* [FIGMA: dsc/color/fixed/fixedNeutralBgInverse] Camada atrás do [dsc] Modal (com --dsc-opacity-56). */
+  --dsc-color-fixed-neutral-bg-inverse: #22292e;
 
   /* Ícones */
   --dsc-icon-color-highlight-1: #005194;
