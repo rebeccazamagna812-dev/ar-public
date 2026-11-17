@@ -44,12 +44,14 @@ const PAGINAS: Routes = [
     title: 'Confira seus dados',
     // Elegibilidade primeiro: acessar a URL direto sem elegibilidade mostra 01.E1.
     canActivate: [jornadaNuvemGuard, triagemConcluidaGuard],
+    data: { modalidade: 'nuvem' },
     loadComponent: () => import('./pages/conferir-dados/conferir-dados').then((m) => m.ConferirDados),
   },
   {
     path: SEGMENTOS_SOLICITACAO.enviadaNuvem,
     title: 'Solicitação enviada',
     canActivate: [solicitacaoRegistradaGuard],
+    data: { modalidade: 'nuvem' },
     loadComponent: () => import('./pages/solicitacao-enviada/solicitacao-enviada').then((m) => m.SolicitacaoEnviada),
   },
   {

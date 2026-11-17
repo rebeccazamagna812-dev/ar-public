@@ -33,7 +33,6 @@ export class SolicitacaoCertificadoMockApi extends SolicitacaoCertificadoApi {
       nomeCompleto: 'João da Silva',
       cpf: '12345678910',
       matricula: 'C000000',
-      documentoIdentidade: 'RG 1.123.456.15 ISP/GO',
       emailCorporativo: 'nome.sobrenome@caixa.gov.br',
       dataNascimento: '1990-01-01',
     }).pipe(delay(LATENCIA_MS));

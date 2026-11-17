@@ -1,38 +1,31 @@
 <dsc-progress [label]="etapa.rotulo" [value]="etapa.valor" />
 
 @if (solicitacao(); as s) {
-  <div class="pagina__feedback">
-    <dsc-state-message illustration="success" label="Solicitação enviada">
-      <p>Solicitação de certificado em nuvem enviada. Acompanhe o andamento em “Acompanhar solicitações”</p>
-      <p>
-        <strong>Referência: {{ s.referencia }}.</strong>
-      </p>
-    </dsc-state-message>
+  <dsc-state-message class="enviada__mensagem" illustration="success" label="Solicitação enviada">
+    Seu certificado {{ modalidade() === 'nuvem' ? 'em nuvem' : 'em mídia física' }} foi solicitado.
+  </dsc-state-message>
 
-    <dsc-card class="proximo-passo">
-      <dsc-card-header icon="mail" [separator]="true">
-        <h2 class="proximo-passo__titulo">Próximo passo: verifique seu e-mail</h2>
-      </dsc-card-header>
-      <dsc-card-body>
-        <dsc-label-value-pair
-          label="Abra a mensagem enviada pelo SERPRO"
-          [value]="'Acesse ' + s.emailValidacao + ' para iniciar a validação da sua identidade.'"
-        />
-        <dsc-label-value-pair
-          label="Acompanhe também sua solicitação"
-          variant="emphasized"
-          value="Use o botão “Acompanhar solicitações” abaixo para consultar o andamento e as próximas orientações."
-        />
-        <dsc-label-value-pair
-          label="Não encontrou a mensagem?"
-          value="Verifique também as pastas de spam e lixo eletrônico."
-        />
-      </dsc-card-body>
-    </dsc-card>
+  <div class="enviada__lista" role="list" aria-label="Detalhes da solicitação">
+    <dsc-list-item label="Referência" [value]="s.referencia" />
+    @if (modalidade() === 'midia-fisica') {
+      <dsc-list-item
+        label="Certificado e mídia"
+        value="Este pedido é somente do certificado digital. Não inclui cartão ou token."
+      />
+    }
+    <dsc-list-item
+      label="Verifique seu e-mail"
+      [value]="'Verifique seu e-mail ' + s.emailValidacao + ' e siga as instruções enviadas pelo SERPRO.'"
+    />
+    <dsc-list-item label="Não encontrou a mensagem?" value="Verifique as pastas de spam e lixo eletrônico." />
+    <dsc-list-item
+      label="Acompanhe a solicitação"
+      value="Use “Meus pedidos” para consultar o andamento e as próximas orientações."
+    />
   </div>
 }
 
 <div class="pagina__acoes">
-  <a dscButton appearance="outline" [routerLink]="rotaInicio">Voltar ao início</a>
-  <a dscButton appearance="plain" routerLink="/acompanhar-solicitacoes">Acompanhar solicitações</a>
+  <button dscButton type="button" appearance="outline" (click)="recomecar()">Voltar ao início</button>
+  <a dscButton appearance="plain" routerLink="/acompanhar-solicitacoes">Meus pedidos</a>
 </div>

@@ -39,15 +39,13 @@ export interface Elegibilidade {
 }
 
 /**
- * Dados cadastrais obtidos do IntegraMais (RH), somente leitura [FIGMA: 01.02 — Confira seus dados] [DOC: HU05].
+ * Dados cadastrais obtidos do IntegraMais (RH), somente leitura [FIGMA: 03.N1, 03.04 — Confira seus dados] [DOC: HU05].
  * [PENDENTE] Formato real do contrato da API.
  */
 export interface DadosCadastrais {
   readonly nomeCompleto: string;
   readonly cpf: string;
   readonly matricula: string;
-  /** Ex.: "RG 1.123.456.15 ISP/GO" [FIGMA: 01.02 — Documento de Identidade]. */
-  readonly documentoIdentidade: string;
   readonly emailCorporativo: string;
   /** Data no formato ISO (AAAA-MM-DD). */
   readonly dataNascimento: string;
