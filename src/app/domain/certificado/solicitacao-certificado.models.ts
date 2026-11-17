@@ -7,6 +7,28 @@
 export type ModalidadeCertificado = 'nuvem' | 'midia-fisica';
 
 /**
+ * Situação do certificado anterior, respondida antes de escolher a modalidade
+ * [FIGMA: 03.00 — "Antes de solicitar seu certificado"].
+ * Só `valido-nao-revogado` impede seguir: é preciso revogar o certificado vigente antes [FIGMA: 03.00; 10.04.03].
+ */
+export type SituacaoCertificadoAnterior = 'primeiro' | 'revogado' | 'vencido' | 'valido-nao-revogado';
+
+/**
+ * Mídia física que guardará o certificado [FIGMA: 03.02 — Informar mídia existente; 03.02A — Consultar estoque].
+ * - cartao / token: o empregado já possui a mídia;
+ * - disponibilizada-pela-unidade: a área ou o gestor confirmou uma mídia disponível na unidade.
+ * O pedido é só do certificado: nenhuma mídia é enviada [FIGMA: 03.04 — "Este pedido não inclui uma nova mídia"].
+ */
+export type MidiaFisica = 'cartao' | 'token' | 'disponibilizada-pela-unidade';
+
+/**
+ * Pedido de certificado enviado ao SERPRO.
+ * [PENDENTE] Contrato real; também não está definido se a situação do certificado anterior (03.00) vai no pedido.
+ */
+export type PedidoCertificado =
+  { readonly modalidade: 'nuvem' } | { readonly modalidade: 'midia-fisica'; readonly midia: MidiaFisica };
+
+/**
  * Resultado da avaliação de elegibilidade feita após o login [DOC: HU03a, HU03c].
  * Indica quais modalidades o empregado pode solicitar. A regra em si (liberação de matrícula,
  * disponibilidade do piloto) fica no backend [DOC: HU21a] [FIGMA: 08.02].

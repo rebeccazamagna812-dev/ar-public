@@ -55,7 +55,7 @@ export class SolicitacaoNuvemJornada {
    * A solicitação só é registrada depois do retorno com a referência [ADR-10].
    */
   confirmar(): Observable<string> {
-    return this.api.enviarSolicitacaoNuvem().pipe(
+    return this.api.enviarSolicitacao({ modalidade: 'nuvem' }).pipe(
       map((resultado) => {
         if (resultado.tipo === 'registrada') {
           this.store.registrarSolicitacao(resultado.solicitacao);

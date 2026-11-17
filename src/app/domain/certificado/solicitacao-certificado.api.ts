@@ -1,5 +1,10 @@
 import { Observable } from 'rxjs';
-import { DadosCadastrais, Elegibilidade, ResultadoEnvioSolicitacao } from './solicitacao-certificado.models';
+import {
+  DadosCadastrais,
+  Elegibilidade,
+  PedidoCertificado,
+  ResultadoEnvioSolicitacao,
+} from './solicitacao-certificado.models';
 
 /**
  * Contrato de acesso ao backend do SIARX para a jornada de solicitação.
@@ -22,8 +27,8 @@ export abstract class SolicitacaoCertificadoApi {
   abstract obterDadosCadastrais(): Observable<DadosCadastrais>;
 
   /**
-   * Envia a solicitação ao SERPRO. A solicitação só é registrada no SIARX depois do retorno bem-sucedido
-   * com o número de referência [FIGMA: 01.03 — "Antes de confirmar"; 01.E4].
+   * Envia o pedido de certificado (nuvem ou mídia física) ao SERPRO. A solicitação só é registrada no SIARX
+   * depois do retorno bem-sucedido com o número de referência [FIGMA: 01.03 — "Antes de confirmar"; 01.E4].
    */
-  abstract enviarSolicitacaoNuvem(): Observable<ResultadoEnvioSolicitacao>;
+  abstract enviarSolicitacao(pedido: PedidoCertificado): Observable<ResultadoEnvioSolicitacao>;
 }

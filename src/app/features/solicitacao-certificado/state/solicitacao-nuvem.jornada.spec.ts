@@ -24,7 +24,7 @@ describe('SolicitacaoNuvemJornada', () => {
           provide: SolicitacaoCertificadoApi,
           useValue: {
             possuiCertificadoNuvemAtivo: () => opcoes.ativo ?? of(false),
-            enviarSolicitacaoNuvem: () => opcoes.envio ?? throwError(() => new Error('não configurado')),
+            enviarSolicitacao: () => opcoes.envio ?? throwError(() => new Error('não configurado')),
           },
         },
       ],

@@ -39,7 +39,8 @@ export class SolicitacaoCertificadoMockApi extends SolicitacaoCertificadoApi {
     }).pipe(delay(LATENCIA_MS));
   }
 
-  enviarSolicitacaoNuvem(): Observable<ResultadoEnvioSolicitacao> {
+  /** Os cenários de envio valem para as duas modalidades. */
+  enviarSolicitacao(): Observable<ResultadoEnvioSolicitacao> {
     let resultado: ResultadoEnvioSolicitacao;
     switch (this.cenario) {
       case 'divergencia-cadastral':
