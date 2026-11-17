@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { ResolveFn, Router, Routes } from '@angular/router';
 import { INTERRUPCOES, isMotivoInterrupcao } from './pages/interrupcao/interrupcoes';
 import { jornadaNuvemGuard, solicitacaoRegistradaGuard } from './guards/jornada-nuvem.guard';
+import { ROTAS_SOLICITACAO, SEGMENTOS_SOLICITACAO } from './solicitacao-certificado.paths';
 
 const tituloInterrupcao: ResolveFn<string> = (route) => {
   const motivo = route.paramMap.get('motivo');
@@ -25,29 +26,28 @@ export const SOLICITACAO_CERTIFICADO_ROUTES: Routes = [
     loadComponent: () => import('./pages/escolher-modalidade/escolher-modalidade').then((m) => m.EscolherModalidade),
   },
   {
-    path: 'nuvem/dados',
+    path: SEGMENTOS_SOLICITACAO.dadosNuvem,
     title: 'Confira seus dados',
     canActivate: [jornadaNuvemGuard],
     loadComponent: () => import('./pages/conferir-dados/conferir-dados').then((m) => m.ConferirDados),
   },
   {
-    path: 'nuvem/enviada',
+    path: SEGMENTOS_SOLICITACAO.enviada,
     title: 'Solicitação enviada',
     canActivate: [solicitacaoRegistradaGuard],
-    loadComponent: () =>
-      import('./pages/solicitacao-enviada/solicitacao-enviada').then((m) => m.SolicitacaoEnviada),
+    loadComponent: () => import('./pages/solicitacao-enviada/solicitacao-enviada').then((m) => m.SolicitacaoEnviada),
   },
   {
-    path: 'nuvem/indisponivel/:motivo',
+    path: `${SEGMENTOS_SOLICITACAO.interrupcao}/:motivo`,
     title: tituloInterrupcao,
     canActivate: [
-      (route) => isMotivoInterrupcao(route.paramMap.get('motivo')) || inject(Router).createUrlTree(['/solicitar']),
+      (route) => isMotivoInterrupcao(route.paramMap.get('motivo')) || inject(Router).parseUrl(ROTAS_SOLICITACAO.inicio),
     ],
     loadComponent: () => import('./pages/interrupcao/interrupcao').then((m) => m.Interrupcao),
   },
   {
     // Fora do escopo desta etapa [FIGMA: seção 02 — Solicitação de Certificado em Mídia Física].
-    path: 'midia-fisica',
+    path: SEGMENTOS_SOLICITACAO.midiaFisica,
     title: 'Solicitar certificado em mídia física',
     data: { titulo: 'Solicitar certificado em mídia física', origem: 'FIGMA: seção 02' },
     loadComponent: () => import('@features/placeholder/placeholder').then((m) => m.Placeholder),

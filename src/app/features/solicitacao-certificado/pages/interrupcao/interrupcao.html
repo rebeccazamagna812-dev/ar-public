@@ -13,12 +13,12 @@
 </div>
 
 <div class="pagina__acoes">
-  <a dscButton appearance="outline" routerLink="/solicitar">Voltar</a>
+  <a dscButton appearance="outline" [routerLink]="rotaInicio">Voltar</a>
   <a
     dscButton
     appearance="plain"
-    routerLink="/solicitar"
-    [queryParams]="c.acaoPrincipal.modalidadeNuvem ? { modalidade: 'nuvem' } : {}"
+    [routerLink]="rotaInicio"
+    [queryParams]="c.acaoPrincipal.modalidadeNuvem ? paramNuvem : {}"
   >
     {{ c.acaoPrincipal.rotulo }}
   </a>

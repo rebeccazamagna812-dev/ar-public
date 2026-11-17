@@ -3,6 +3,8 @@ import { Router, RouterLink } from '@angular/router';
 import { DscButton, DscCard, DscCardAlert, DscProgress, DscRadio } from '@dsc/web';
 import { ElegibilidadeService } from '@core/elegibilidade/elegibilidade.service';
 import { ModalidadeCertificado } from '@core/models/solicitacao-certificado.models';
+import { ETAPAS_JORNADA } from '../../solicitacao-certificado.etapas';
+import { ROTAS_SOLICITACAO } from '../../solicitacao-certificado.paths';
 import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
 
 /**
@@ -28,6 +30,7 @@ export class EscolherModalidade implements OnInit {
   /** Query param `modalidade` (withComponentInputBinding). */
   readonly modalidade = input<string | undefined>(undefined);
 
+  protected readonly etapa = ETAPAS_JORNADA.escolha;
   protected readonly podeNuvem = this.elegibilidade.podeSolicitarNuvem;
   protected readonly podeMidiaFisica = this.elegibilidade.podeSolicitarMidiaFisica;
   protected readonly falhaElegibilidade = this.elegibilidade.falhou;
@@ -69,6 +72,8 @@ export class EscolherModalidade implements OnInit {
       return;
     }
     this.store.selecionarModalidade(modalidade);
-    void this.router.navigateByUrl(modalidade === 'nuvem' ? '/solicitar/nuvem/dados' : '/solicitar/midia-fisica');
+    void this.router.navigateByUrl(
+      modalidade === 'nuvem' ? ROTAS_SOLICITACAO.dadosNuvem : ROTAS_SOLICITACAO.midiaFisica,
+    );
   }
 }

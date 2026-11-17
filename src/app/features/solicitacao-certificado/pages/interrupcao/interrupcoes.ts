@@ -1,9 +1,10 @@
 import { DscIllustrationName } from '@dsc/web';
 import { MotivoInterrupcao } from '@core/models/solicitacao-certificado.models';
+import { ETAPAS_JORNADA, EtapaJornada } from '../../solicitacao-certificado.etapas';
 
 /** Conteúdo de cada tela de interrupção da jornada, copiado do Figma. */
 export interface ConteudoInterrupcao {
-  readonly etapa: { readonly rotulo: string; readonly valor: number };
+  readonly etapa: EtapaJornada;
   readonly ilustracao: DscIllustrationName;
   readonly titulo: string;
   readonly texto: string;
@@ -14,7 +15,7 @@ export interface ConteudoInterrupcao {
 export const INTERRUPCOES: Readonly<Record<MotivoInterrupcao, ConteudoInterrupcao>> = {
   /** [FIGMA: 01.E1 — Não elegível] */
   'nao-elegivel': {
-    etapa: { rotulo: 'Etapa 1 de 3', valor: 33 },
+    etapa: ETAPAS_JORNADA.escolha,
     ilustracao: 'warning',
     titulo: 'Certificado em nuvem indisponível',
     texto: 'Neste momento, você não atende aos critérios de elegibilidade para solicitar certificado em nuvem.',
@@ -26,7 +27,7 @@ export const INTERRUPCOES: Readonly<Record<MotivoInterrupcao, ConteudoInterrupca
   },
   /** [FIGMA: 01.E2 — Certificado em nuvem ativo] */
   'certificado-ativo': {
-    etapa: { rotulo: 'Etapa 1 de 3', valor: 33 },
+    etapa: ETAPAS_JORNADA.escolha,
     ilustracao: 'warning',
     titulo: 'Você já possui um certificado em nuvem ativo',
     texto: 'Revogue o certificado vigente antes de realizar uma nova solicitação.',
@@ -38,7 +39,7 @@ export const INTERRUPCOES: Readonly<Record<MotivoInterrupcao, ConteudoInterrupca
   },
   /** [FIGMA: 01.E3 — Divergência cadastral] */
   'divergencia-cadastral': {
-    etapa: { rotulo: 'Etapa 2 de 3', valor: 67 },
+    etapa: ETAPAS_JORNADA.dados,
     ilustracao: 'error',
     titulo: 'Não foi possível prosseguir',
     texto:
@@ -51,7 +52,7 @@ export const INTERRUPCOES: Readonly<Record<MotivoInterrupcao, ConteudoInterrupca
   },
   /** [FIGMA: 01.E4 — SERPRO indisponível] */
   'serpro-indisponivel': {
-    etapa: { rotulo: 'Etapa 3 de 3', valor: 100 },
+    etapa: ETAPAS_JORNADA.envio,
     ilustracao: 'error',
     titulo: 'Não foi possível enviar a solicitação',
     texto: 'O serviço do SERPRO está indisponível no momento. Tente novamente mais tarde.',

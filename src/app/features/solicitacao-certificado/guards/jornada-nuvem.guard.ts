@@ -3,9 +3,8 @@ import { CanActivateFn, Router } from '@angular/router';
 import { catchError, map, of } from 'rxjs';
 import { SolicitacaoCertificadoApi } from '@core/api/solicitacao-certificado.api';
 import { ElegibilidadeService } from '@core/elegibilidade/elegibilidade.service';
+import { ROTAS_SOLICITACAO } from '../solicitacao-certificado.paths';
 import { SolicitacaoNuvemStore } from '../state/solicitacao-nuvem.store';
-
-export const ROTA_INTERRUPCAO = '/solicitar/nuvem/indisponivel';
 
 /**
  * Guarda de entrada na jornada de certificado em nuvem (a partir da etapa 2).
@@ -20,24 +19,24 @@ export const jornadaNuvemGuard: CanActivateFn = () => {
   const store = inject(SolicitacaoNuvemStore);
 
   if (!elegibilidade.podeSolicitarNuvem()) {
-    return router.createUrlTree([ROTA_INTERRUPCAO, 'nao-elegivel']);
+    return router.parseUrl(ROTAS_SOLICITACAO.interrupcao('nao-elegivel'));
   }
 
   return api.possuiCertificadoNuvemAtivo().pipe(
     map((ativo) => {
       if (ativo) {
-        return router.createUrlTree([ROTA_INTERRUPCAO, 'certificado-ativo']);
+        return router.parseUrl(ROTAS_SOLICITACAO.interrupcao('certificado-ativo'));
       }
       store.selecionarModalidade('nuvem');
       return true;
     }),
     // [PENDENTE] Comportamento em falha da consulta. Por ora, volta à escolha de modalidade.
-    catchError(() => of(router.createUrlTree(['/solicitar']))),
+    catchError(() => of(router.parseUrl(ROTAS_SOLICITACAO.inicio))),
   );
 };
 
 /** Só deixa abrir a tela de sucesso (01.04) se houver uma solicitação registrada nesta jornada. */
 export const solicitacaoRegistradaGuard: CanActivateFn = () => {
   const store = inject(SolicitacaoNuvemStore);
-  return store.solicitacao() ? true : inject(Router).createUrlTree(['/solicitar']);
+  return store.solicitacao() ? true : inject(Router).parseUrl(ROTAS_SOLICITACAO.inicio);
 };

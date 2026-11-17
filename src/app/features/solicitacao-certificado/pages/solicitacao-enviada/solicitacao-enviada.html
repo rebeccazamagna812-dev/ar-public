@@ -1,12 +1,12 @@
-<dsc-progress label="Concluído" [value]="100" />
+<dsc-progress [label]="etapa.rotulo" [value]="etapa.valor" />
 
 @if (solicitacao(); as s) {
   <div class="pagina__feedback">
     <dsc-state-message illustration="success" label="Solicitação enviada">
+      <p>Solicitação de certificado em nuvem enviada. Acompanhe o andamento em “Acompanhar solicitações”</p>
       <p>
-        Solicitação de certificado em nuvem enviada. Acompanhe o andamento em “Acompanhar solicitações”
+        <strong>Referência: {{ s.referencia }}.</strong>
       </p>
-      <p><strong>Referência: {{ s.referencia }}.</strong></p>
     </dsc-state-message>
 
     <dsc-card class="proximo-passo">
@@ -33,6 +33,6 @@
 }
 
 <div class="pagina__acoes">
-  <a dscButton appearance="outline" routerLink="/solicitar">Voltar ao início</a>
+  <a dscButton appearance="outline" [routerLink]="rotaInicio">Voltar ao início</a>
   <a dscButton appearance="plain" routerLink="/acompanhar-solicitacoes">Acompanhar solicitações</a>
 </div>

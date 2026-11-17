@@ -1,5 +1,6 @@
 import { Route, Routes } from '@angular/router';
 import { Shell } from '@layout/shell/shell';
+import { SEGMENTO_SOLICITACAO } from '@features/solicitacao-certificado/solicitacao-certificado.paths';
 
 /** Rota placeholder: aponta para a tela genérica com o título da funcionalidade. */
 function placeholder(path: string, titulo: string, origem: string): Route {
@@ -28,7 +29,7 @@ export const routes: Routes = [
         loadComponent: () => import('@features/home/home').then((m) => m.Home),
       },
       {
-        path: 'solicitar',
+        path: SEGMENTO_SOLICITACAO,
         loadChildren: () =>
           import('@features/solicitacao-certificado/solicitacao-certificado.routes').then(
             (m) => m.SOLICITACAO_CERTIFICADO_ROUTES,

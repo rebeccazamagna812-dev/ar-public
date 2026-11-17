@@ -6,7 +6,8 @@ import { finalize } from 'rxjs';
 import { DscButton, DscCardAlert, DscProgress, DscTextFieldForm } from '@dsc/web';
 import { SolicitacaoCertificadoApi } from '@core/api/solicitacao-certificado.api';
 import { MascaraCpfPipe } from '@shared/pipes/mascara-cpf.pipe';
-import { ROTA_INTERRUPCAO } from '../../guards/jornada-nuvem.guard';
+import { ETAPAS_JORNADA } from '../../solicitacao-certificado.etapas';
+import { PARAM_MODALIDADE, ROTAS_SOLICITACAO } from '../../solicitacao-certificado.paths';
 import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
 
 /**
@@ -28,6 +29,7 @@ export class ConferirDados {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
 
+  protected readonly etapa = ETAPAS_JORNADA.dados;
   protected readonly dados = this.store.dados;
   protected readonly carregando = signal(true);
   protected readonly erroCarregamento = signal(false);
@@ -47,7 +49,7 @@ export class ConferirDados {
   }
 
   protected voltar(): void {
-    void this.router.navigate(['/solicitar'], { queryParams: { modalidade: 'nuvem' } });
+    void this.router.navigate([ROTAS_SOLICITACAO.inicio], { queryParams: { [PARAM_MODALIDADE]: 'nuvem' } });
   }
 
   protected confirmar(): void {
@@ -65,13 +67,13 @@ export class ConferirDados {
         next: (resultado) => {
           if (resultado.tipo === 'registrada') {
             this.store.registrarSolicitacao(resultado.solicitacao);
-            void this.router.navigateByUrl('/solicitar/nuvem/enviada');
+            void this.router.navigateByUrl(ROTAS_SOLICITACAO.enviada);
           } else {
-            void this.router.navigate([ROTA_INTERRUPCAO, resultado.motivo]);
+            void this.router.navigateByUrl(ROTAS_SOLICITACAO.interrupcao(resultado.motivo));
           }
         },
         // Falha técnica no envio: mesma orientação de indisponibilidade do SERPRO [FIGMA: 01.E4].
-        error: () => void this.router.navigate([ROTA_INTERRUPCAO, 'serpro-indisponivel']),
+        error: () => void this.router.navigateByUrl(ROTAS_SOLICITACAO.interrupcao('serpro-indisponivel')),
       });
   }
 }
