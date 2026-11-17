@@ -61,6 +61,8 @@ siarx-front/
 │        └─ nao-encontrado/
 └─ docs/
    ├─ arquitetura.md                ADRs
+   ├─ jornada-nuvem.md              diagrama de estados da jornada e onde fica cada decisão
+   ├─ nova-funcionalidade.md        roteiro para implementar uma funcionalidade "Em construção"
    └─ rastreabilidade.md            matriz Item | Arquivo | Origem + pendências
 ```
 
