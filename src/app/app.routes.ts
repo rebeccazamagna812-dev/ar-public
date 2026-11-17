@@ -4,11 +4,11 @@ import { Shell } from '@layout/shell/shell';
 import { SEGMENTO_SOLICITACAO } from '@features/solicitacao-certificado/solicitacao-certificado.paths';
 
 /** Rota placeholder: aponta para a tela genérica com o título da funcionalidade. */
-function placeholder(rota: string, titulo: string, origem: string): Route {
+function placeholder(rota: string, titulo: string): Route {
   return {
     path: rota.replace(/^\//, ''),
     title: titulo,
-    data: { titulo, origem },
+    data: { titulo },
     loadComponent: () => import('@shared/paginas/placeholder/placeholder').then((m) => m.Placeholder),
   };
 }
@@ -38,7 +38,7 @@ export const routes: Routes = [
           ),
       },
       // Funcionalidades futuras: geradas a partir da navegação (core/navegacao/navegacao.ts).
-      ...ROTAS_EM_CONSTRUCAO.map(({ rota, titulo, origem }) => placeholder(rota, titulo, origem)),
+      ...ROTAS_EM_CONSTRUCAO.map(({ rota, titulo }) => placeholder(rota, titulo)),
       {
         path: '**',
         title: 'Página não encontrada',

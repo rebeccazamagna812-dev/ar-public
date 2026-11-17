@@ -18,13 +18,9 @@ import { DscButton, DscCardAlert } from '@dsc/web';
     </div>
     <dsc-card-alert title="Em construção">
       Esta funcionalidade ainda não foi implementada nesta etapa do projeto.
-      @if (origem()) {
-        Referência de design: {{ origem() }}.
-      }
     </dsc-card-alert>
   `,
 })
 export class Placeholder {
   readonly titulo = input.required<string>();
-  readonly origem = input<string>('');
 }
