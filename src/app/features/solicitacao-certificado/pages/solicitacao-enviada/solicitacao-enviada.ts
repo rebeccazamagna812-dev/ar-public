@@ -11,7 +11,7 @@ import {
 } from '@dsc/web';
 import { ETAPAS_JORNADA } from '../../solicitacao-certificado.etapas';
 import { ROTAS_SOLICITACAO } from '../../solicitacao-certificado.paths';
-import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
+import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
 
 /**
  * Solicitação enviada. [FIGMA: 01.04 — Solicitação enviada]
@@ -36,5 +36,5 @@ import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
 export class SolicitacaoEnviada {
   protected readonly etapa = ETAPAS_JORNADA.concluido;
   protected readonly rotaInicio = ROTAS_SOLICITACAO.inicio;
-  protected readonly solicitacao = inject(SolicitacaoNuvemStore).solicitacao;
+  protected readonly solicitacao = inject(SolicitacaoNuvemJornada).solicitacao;
 }

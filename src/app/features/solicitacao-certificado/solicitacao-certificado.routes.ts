@@ -3,6 +3,8 @@ import { ResolveFn, Router, Routes } from '@angular/router';
 import { INTERRUPCOES, isMotivoInterrupcao } from './pages/interrupcao/interrupcoes';
 import { jornadaNuvemGuard, solicitacaoRegistradaGuard } from './guards/jornada-nuvem.guard';
 import { ROTAS_SOLICITACAO, SEGMENTOS_SOLICITACAO } from './solicitacao-certificado.paths';
+import { SolicitacaoNuvemJornada } from './state/solicitacao-nuvem.jornada';
+import { SolicitacaoNuvemStore } from './state/solicitacao-nuvem.store';
 
 const tituloInterrupcao: ResolveFn<string> = (route) => {
   const motivo = route.paramMap.get('motivo');
@@ -18,8 +20,10 @@ const tituloInterrupcao: ResolveFn<string> = (route) => {
  *   /solicitar/nuvem/indisponivel/:motivo    01.E1–01.E4     Interrupções da jornada
  * A tela 01.03 (Revisar e confirmar) está esmaecida (12%) no Figma e o protótipo vai de 01.02 direto para 01.04.
  * Por isso ela não foi implementada [FIGMA: 01.03, opacidade 0.12; interação "Confirmar solicitação" → 01.04].
+ *
+ * O estado e a fachada da jornada são fornecidos na rota pai: só as telas desta funcionalidade os enxergam.
  */
-export const SOLICITACAO_CERTIFICADO_ROUTES: Routes = [
+const PAGINAS: Routes = [
   {
     path: '',
     title: 'Solicitar certificado digital',
@@ -51,5 +55,13 @@ export const SOLICITACAO_CERTIFICADO_ROUTES: Routes = [
     title: 'Solicitar certificado em mídia física',
     data: { titulo: 'Solicitar certificado em mídia física', origem: 'FIGMA: seção 02' },
     loadComponent: () => import('@features/placeholder/placeholder').then((m) => m.Placeholder),
+  },
+];
+
+export const SOLICITACAO_CERTIFICADO_ROUTES: Routes = [
+  {
+    path: '',
+    providers: [SolicitacaoNuvemStore, SolicitacaoNuvemJornada],
+    children: PAGINAS,
   },
 ];

@@ -23,9 +23,13 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
 - **Decisão:** `core/` (singletons, contratos, guards globais, erros), `layout/` (shell), `shared/` (ui, pipes, estilos de página), `features/<funcionalidade>/` com rotas próprias e lazy loading.
 - **Origem:** `[PADRÃO DE MERCADO]` + diretriz do projeto.
 
-## ADR-05 — Estado com signals em serviço de feature
-- **Decisão:** `SolicitacaoNuvemStore` (signals) guarda a modalidade, os dados e a solicitação registrada durante a jornada. Nada é persistido no navegador.
-- **Descartadas:** NgRx (desproporcional ao escopo atual).
+## ADR-05 — Estado com signals + fachada da jornada, no escopo da feature
+- **Decisão:**
+  - `SolicitacaoNuvemStore` (signals) guarda os dados e a solicitação registrada durante a jornada. Nada é persistido no navegador.
+  - `SolicitacaoNuvemJornada` (fachada) concentra as regras e decide a próxima tela: entrada na etapa 2, carga dos dados e envio. Telas e guards só chamam a fachada; só ela escreve no store.
+  - Os dois são fornecidos em `providers` da rota da funcionalidade, não em `root`.
+- **Por quê:** a regra "sucesso → 01.04, divergência → 01.E3, falha → 01.E4" fica num lugar só e é testada sem renderizar componentes.
+- **Descartadas:** NgRx (desproporcional ao escopo atual); lógica dentro das páginas e dos guards (versão anterior).
 - **Origem:** `[PADRÃO DE MERCADO]`; `[DOC: RNF01]` para não guardar dado sensível.
 
 ## ADR-06 — API e autenticação por contrato (classe abstrata) + implementação simulada
@@ -38,11 +42,11 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
 - **Origem:** `[DOC: HU03a RN04/RF04, HU02 CA02, HU03c CA02]`.
 
 ## ADR-08 — Guards da jornada
-- **Decisão:** `jornadaNuvemGuard` na etapa 2:
+- **Decisão:** `jornadaNuvemGuard` na etapa 2 delega a `SolicitacaoNuvemJornada.verificarEntradaNuvem()`:
   - sem elegibilidade → 01.E1;
   - certificado em nuvem ativo → 01.E2.
 
-  O resultado do envio decide entre 01.04, 01.E3 e 01.E4. `solicitacaoRegistradaGuard` protege 01.04.
+  Guards não alteram estado. O resultado do envio (`SolicitacaoNuvemJornada.confirmar()`) decide entre 01.04, 01.E3 e 01.E4. `solicitacaoRegistradaGuard` protege 01.04.
 - **Origem:** `[FIGMA: 01.E1–01.E4]` `[DOC: HU04]`.
 
 ## ADR-09 — Fluxo em 2 telas + envio (sem a 01.03)

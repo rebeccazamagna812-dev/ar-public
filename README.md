@@ -54,7 +54,7 @@ siarx-front/
 │     ├─ shared/                    ui/card-acesso (componente local), pipes, styles/pagina.css
 │     └─ features/
 │        ├─ home/                   00.01 — Home
-│        ├─ solicitacao-certificado/  jornada em nuvem (rotas, guards, store, páginas)
+│        ├─ solicitacao-certificado/  jornada em nuvem (rotas, paths, etapas, guards, store + fachada, páginas)
 │        ├─ placeholder/            tela genérica das funcionalidades futuras
 │        └─ nao-encontrado/
 └─ docs/

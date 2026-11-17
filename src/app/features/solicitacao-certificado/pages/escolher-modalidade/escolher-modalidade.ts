@@ -5,7 +5,7 @@ import { ElegibilidadeService } from '@core/elegibilidade/elegibilidade.service'
 import { ModalidadeCertificado } from '@core/models/solicitacao-certificado.models';
 import { ETAPAS_JORNADA } from '../../solicitacao-certificado.etapas';
 import { ROTAS_SOLICITACAO } from '../../solicitacao-certificado.paths';
-import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
+import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
 
 /**
  * Etapa 1 de 3 — Escolher modalidade.
@@ -24,7 +24,7 @@ import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
 })
 export class EscolherModalidade implements OnInit {
   private readonly router = inject(Router);
-  private readonly store = inject(SolicitacaoNuvemStore);
+  private readonly jornada = inject(SolicitacaoNuvemJornada);
   private readonly elegibilidade = inject(ElegibilidadeService);
 
   /** Query param `modalidade` (withComponentInputBinding). */
@@ -53,7 +53,7 @@ export class EscolherModalidade implements OnInit {
 
   ngOnInit(): void {
     // Voltar a esta etapa recomeça a jornada.
-    this.store.reiniciar();
+    this.jornada.reiniciar();
   }
 
   protected selecionar(modalidade: string): void {
@@ -71,7 +71,6 @@ export class EscolherModalidade implements OnInit {
     if (!modalidade) {
       return;
     }
-    this.store.selecionarModalidade(modalidade);
     void this.router.navigateByUrl(
       modalidade === 'nuvem' ? ROTAS_SOLICITACAO.dadosNuvem : ROTAS_SOLICITACAO.midiaFisica,
     );

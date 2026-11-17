@@ -4,14 +4,18 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, provideRouter } f
 import { Observable, firstValueFrom, isObservable, of } from 'rxjs';
 import { SolicitacaoCertificadoApi } from '@core/api/solicitacao-certificado.api';
 import { ElegibilidadeService } from '@core/elegibilidade/elegibilidade.service';
+import { SolicitacaoNuvemJornada } from '../state/solicitacao-nuvem.jornada';
+import { SolicitacaoNuvemStore } from '../state/solicitacao-nuvem.store';
 import { jornadaNuvemGuard } from './jornada-nuvem.guard';
 
-/** Teste de exemplo da camada de guard. */
+/** Guard + fachada: confere a tradução das decisões da jornada em navegação. */
 describe('jornadaNuvemGuard', () => {
   function configurar(opcoes: { elegivel: boolean; ativo: boolean }) {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([]),
+        SolicitacaoNuvemStore,
+        SolicitacaoNuvemJornada,
         { provide: ElegibilidadeService, useValue: { podeSolicitarNuvem: signal(opcoes.elegivel) } },
         {
           provide: SolicitacaoCertificadoApi,
