@@ -7,6 +7,7 @@ import { DscButton, DscStateMessage } from '@dsc/web';
   selector: 'app-nao-encontrado',
   imports: [RouterLink, DscButton, DscStateMessage],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   template: `
     <div class="pagina__feedback">
       <dsc-state-message illustration="warning" label="Página não encontrada">
@@ -17,6 +18,5 @@ import { DscButton, DscStateMessage } from '@dsc/web';
       <a dscButton appearance="plain" routerLink="/">Ir para a página principal</a>
     </div>
   `,
-  styleUrl: '../../shared/styles/pagina.css',
 })
 export class NaoEncontrado {}

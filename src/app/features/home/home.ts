@@ -12,8 +12,9 @@ import { CardAcesso } from '@shared/ui/card-acesso/card-acesso';
   selector: 'app-home',
   imports: [RouterLink, DscButton, DscCardAlert, CardAcesso],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   templateUrl: './home.html',
-  styleUrls: ['../../shared/styles/pagina.css', './home.css'],
+  styleUrl: './home.css',
 })
 export class Home {
   protected readonly cards = CARDS_HOME;

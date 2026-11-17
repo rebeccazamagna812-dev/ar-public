@@ -18,8 +18,9 @@ import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
   selector: 'app-conferir-dados',
   imports: [DatePipe, MascaraCpfPipe, DscButton, DscCardAlert, DscProgress, DscTextFieldForm],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   templateUrl: './conferir-dados.html',
-  styleUrls: ['../../../../shared/styles/pagina.css', './conferir-dados.css'],
+  styleUrl: './conferir-dados.css',
 })
 export class ConferirDados {
   private readonly jornada = inject(SolicitacaoNuvemJornada);

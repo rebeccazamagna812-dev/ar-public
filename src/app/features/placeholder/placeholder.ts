@@ -10,6 +10,7 @@ import { DscButton, DscCardAlert } from '@dsc/web';
   selector: 'app-placeholder',
   imports: [RouterLink, DscButton, DscCardAlert],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   template: `
     <div class="pagina__cabecalho">
       <h1 class="pagina__titulo">{{ titulo() }}</h1>
@@ -22,7 +23,6 @@ import { DscButton, DscCardAlert } from '@dsc/web';
       }
     </dsc-card-alert>
   `,
-  styleUrl: '../../shared/styles/pagina.css',
 })
 export class Placeholder {
   readonly titulo = input.required<string>();

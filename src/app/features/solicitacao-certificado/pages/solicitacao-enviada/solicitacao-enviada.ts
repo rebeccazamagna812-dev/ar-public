@@ -30,8 +30,9 @@ import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
     DscStateMessage,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   templateUrl: './solicitacao-enviada.html',
-  styleUrls: ['../../../../shared/styles/pagina.css', './solicitacao-enviada.css'],
+  styleUrl: './solicitacao-enviada.css',
 })
 export class SolicitacaoEnviada {
   protected readonly etapa = ETAPAS_JORNADA.concluido;

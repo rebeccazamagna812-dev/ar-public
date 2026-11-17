@@ -13,8 +13,8 @@ import { INTERRUPCOES, isMotivoInterrupcao } from './interrupcoes';
   selector: 'app-interrupcao',
   imports: [RouterLink, DscButton, DscProgress, DscStateMessage],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   templateUrl: './interrupcao.html',
-  styleUrl: '../../../../shared/styles/pagina.css',
 })
 export class Interrupcao {
   /** Parâmetro de rota `:motivo` (withComponentInputBinding). Validado pelo guard da rota. */

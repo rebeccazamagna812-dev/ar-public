@@ -19,8 +19,9 @@ import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
   selector: 'app-escolher-modalidade',
   imports: [RouterLink, DscButton, DscCard, DscCardAlert, DscProgress, DscRadio],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   templateUrl: './escolher-modalidade.html',
-  styleUrls: ['../../../../shared/styles/pagina.css', './escolher-modalidade.css'],
+  styleUrl: './escolher-modalidade.css',
 })
 export class EscolherModalidade implements OnInit {
   private readonly router = inject(Router);

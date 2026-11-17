@@ -1,9 +1,12 @@
 /*
  * Estrutura comum das páginas dentro da área de conteúdo.
  * [FIGMA: frame "Conteúdo" — auto layout vertical, gap 20, ações fixadas no rodapé por um Spacer]
- * Importado por cada página via `styleUrls`.
+ *
+ * Estilo GLOBAL (angular.json → styles). Cada página roteada declara `host: { class: 'pagina' }` e usa as
+ * classes `pagina__*` no template. É global, e não um componente <app-pagina>, porque o CSS encapsulado de um
+ * componente não alcança o conteúdo projetado nem o elemento host da rota, que precisa ocupar a altura toda.
  */
-:host {
+.pagina {
   display: flex;
   flex: 1;
   flex-direction: column;

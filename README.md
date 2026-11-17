@@ -51,7 +51,7 @@ siarx-front/
 │     ├─ core/                      singletons: api (contrato + mock), auth, elegibilidade,
 │     │                             erros, http (interceptor), navegação, modelos
 │     ├─ layout/shell/              Header + Menu lateral + Conta + Conteúdo + Footer
-│     ├─ shared/                    ui/card-acesso (componente local), pipes, styles/pagina.css
+│     ├─ shared/                    ui/card-acesso (componente local), pipes, styles/pagina.css (global)
 │     └─ features/
 │        ├─ home/                   00.01 — Home
 │        ├─ solicitacao-certificado/  jornada em nuvem (rotas, paths, etapas, guards, store + fachada, páginas)
@@ -74,6 +74,8 @@ Aliases (`tsconfig.json`): `@core/*`, `@shared/*`, `@layout/*`, `@features/*`, `
 - Código em inglês onde é convenção do framework. Domínio, comentários e textos em **pt-BR**.
 - Toda decisão relevante tem origem anotada no código: `[FIGMA: …]`, `[DOC: …]`, `[PADRÃO DE MERCADO]` ou `[PENDENTE]`.
 - Nenhuma cor, fonte ou espaçamento fixo: só `var(--dsc-*)`.
+- Toda página roteada declara `host: { class: 'pagina' }` e usa as classes `pagina__*` (`titulo`, `subtitulo`,
+  `cabecalho`, `feedback`, `orientacoes`, `acoes`), definidas em `shared/styles/pagina.css`, que é global.
 
 ## Como usar os tokens
 
