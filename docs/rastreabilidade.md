@@ -15,7 +15,7 @@
 | Menu da conta ("Sair") | `shell.html` | `[FIGMA: OV — Conta do usuário]` |
 | Área de conteúdo (1248 px, padding 24, gap 20) | `shell.css`, `shared/styles/pagina.css` | `[FIGMA: frame Conteúdo]` |
 | Footer | `shell.html`, `environments/*` | `[FIGMA: [dsc] Footer]` |
-| Home: 9 cards e 2 alertas | `features/home/*`, `navegacao.ts` | `[FIGMA: 00.01 — Home]` |
+| Home: 9 cards (ordem em `home.ordem`) e 2 alertas | `features/home/*`, `navegacao.ts` | `[FIGMA: 00.01 — Home]` |
 | Card de acesso (local) | `shared/ui/card-acesso/card-acesso.ts` | `[FIGMA: AR-CAIXA / Card de acesso]` |
 | Etapa 1: escolher modalidade, Continuar desabilitado sem seleção | `pages/escolher-modalidade/*` | `[FIGMA: 01.01, 01.01A]` |
 | Ocultar modalidade inelegível | `escolher-modalidade.html` | `[DOC: HU02 CA02, HU03a CA02, HU03c CA02]` |
@@ -33,7 +33,7 @@
 | Sem dados sensíveis em log | `core/erros/*`, `core/http/*` | `[DOC: RNF01]` |
 | Locale pt-BR | `app.config.ts` | diretriz do projeto |
 | Título da aba, foco na navegação, skip link | `core/navegacao/siarx-title-strategy.ts`, `shell.*` | `[PADRÃO DE MERCADO]` |
-| Placeholders das demais funcionalidades | `app.routes.ts`, `features/placeholder` | `[FIGMA: seções 00.02, 04–10]` |
+| Placeholders das demais funcionalidades | `navegacao.ts` (`emConstrucao`, `PAGINAS_FORA_DO_MENU`) → `app.routes.ts`, `features/placeholder` | `[FIGMA: seções 00.02, 04–10]` |
 | Página não encontrada | `features/nao-encontrado` | `[PADRÃO DE MERCADO]` |
 | Erro ao carregar dados / elegibilidade | `conferir-dados.html`, `escolher-modalidade.html` | `[PADRÃO DE MERCADO]` (sem tela no Figma) |
 
