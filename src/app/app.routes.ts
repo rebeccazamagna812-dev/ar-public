@@ -15,7 +15,7 @@ function placeholder(rota: string, titulo: string, origem: string): Route {
 
 /**
  * Mapa de rotas.
- * Fonte das funcionalidades: Menu lateral e Home [FIGMA: Fluxo V1 (em andamento) 2 → OV — Menu lateral, 00.01 — Home].
+ * Fonte das funcionalidades: Menu lateral e Home [FIGMA: Fluxo V1 (em andamento) → OV — Menu lateral, 01.00 — Home].
  * Nesta etapa só a jornada de solicitação de certificado em nuvem está implementada. As demais rotas são placeholders,
  * geradas a partir de ROTAS_EM_CONSTRUCAO: para incluir uma funcionalidade, edite só core/navegacao/navegacao.ts.
  */

@@ -2,7 +2,7 @@ import { DscIconName } from '@dsc/web';
 
 /**
  * Itens de navegação do SIARX, numa fonte única usada pelo Menu lateral e pelos cards da Home.
- * [FIGMA: Fluxo V1 (em andamento) 2 → OV — Menu lateral; 00.01 — Home]
+ * [FIGMA: Fluxo V1 (em andamento) → 00 — Navegação global (OV — Menu lateral); 01.00 — Home]
  * Hoje todos os perfis veem todos os itens, como no Figma.
  * [PENDENTE] Filtro por perfil (Fase 1, F9/G2).
  */
@@ -13,7 +13,7 @@ export interface ItemNavegacao {
   readonly icone: DscIconName;
   /**
    * Card de acesso na Home (ausente = não aparece na Home).
-   * `ordem`: posição do card, que no Figma é diferente da ordem do menu [FIGMA: 00.01 — Home → Linhas 1–3].
+   * `ordem`: posição do card, que no Figma é diferente da ordem do menu [FIGMA: 01.00 — Home → Linhas 1–3].
    */
   readonly home?: { readonly ordem: number; readonly titulo: string; readonly descricao: string };
   /** Funcionalidade ainda não implementada: gera uma rota para a tela "Em construção". */
@@ -39,7 +39,7 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
       titulo: 'Meus certificados',
       descricao: 'Consulte a situação e a validade dos certificados emitidos para você.',
     },
-    emConstrucao: { titulo: 'Meus certificados', origem: 'FIGMA: 01.1.01' },
+    emConstrucao: { titulo: 'Meus certificados', origem: 'FIGMA: 01.01' },
   },
   {
     rota: '/nova-midia-fisica',
@@ -50,7 +50,7 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
       titulo: 'Solicitar Mídia Física',
       descricao: 'Verifique se precisa de outro token ou cartão antes de solicitar uma nova mídia.',
     },
-    emConstrucao: { titulo: 'Nova Mídia Física', origem: 'FIGMA: 00.02' },
+    emConstrucao: { titulo: 'Nova Mídia Física', origem: 'FIGMA: 02.01' },
   },
   {
     rota: '/solicitar',
@@ -71,7 +71,7 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
       titulo: 'Acompanhar solicitações',
       descricao: 'Acompanhe seus pedidos e consulte as orientações de ativação.',
     },
-    emConstrucao: { titulo: 'Acompanhar solicitações', origem: 'FIGMA: 07' },
+    emConstrucao: { titulo: 'Acompanhar solicitações', origem: 'FIGMA: 08.01' },
   },
   {
     rota: '/tratar-solicitacoes',
@@ -82,7 +82,7 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
       titulo: 'Tratar solicitações',
       descricao: 'Analise os pedidos e registre a decisão de tratamento.',
     },
-    emConstrucao: { titulo: 'Tratamento de solicitações', origem: 'FIGMA: 04' },
+    emConstrucao: { titulo: 'Tratamento de solicitações', origem: 'FIGMA: 04.01' },
   },
   {
     rota: '/historico-auditoria',
@@ -93,7 +93,7 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
       titulo: 'Histórico e auditoria',
       descricao: 'Consulte registros e informações para auditoria.',
     },
-    emConstrucao: { titulo: 'Histórico e auditoria', origem: 'FIGMA: 05' },
+    emConstrucao: { titulo: 'Histórico e auditoria', origem: 'FIGMA: 05.01' },
   },
   {
     rota: '/revogar-certificado',
@@ -104,7 +104,7 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
       titulo: 'Revogar certificado',
       descricao: 'Solicite a revogação de um certificado ativo.',
     },
-    emConstrucao: { titulo: 'Revogar certificado', origem: 'FIGMA: 06 / 06.1' },
+    emConstrucao: { titulo: 'Revogar certificado', origem: 'FIGMA: 06.01' },
   },
   {
     rota: '/dashboard',
@@ -115,7 +115,7 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
       titulo: 'Dashboard',
       descricao: 'Visualize indicadores e solicitações que precisam de atenção.',
     },
-    emConstrucao: { titulo: 'Dashboard', origem: 'FIGMA: 10' },
+    emConstrucao: { titulo: 'Dashboard', origem: 'FIGMA: 11.01' },
   },
   {
     rota: '/administracao',
@@ -126,15 +126,15 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
       titulo: 'Administração',
       descricao: 'Gerencie funcionalidades e cadastros de agentes e autorizadores.',
     },
-    emConstrucao: { titulo: 'Administração', origem: 'FIGMA: 08' },
+    emConstrucao: { titulo: 'Administração', origem: 'FIGMA: 09.01' },
   },
 ];
 
 /** Páginas fora do menu lateral que ainda não foram implementadas. */
 export const PAGINAS_FORA_DO_MENU: readonly (PaginaEmConstrucao & { readonly rota: string })[] = [
-  { rota: '/duvidas-frequentes', titulo: 'Perguntas frequentes', origem: 'FIGMA: 09' },
-  { rota: '/ajuda/certificado-em-nuvem', titulo: 'Certificado em nuvem', origem: 'FIGMA: 00.01.A1' },
-  { rota: '/ajuda/midia-fisica', titulo: 'Mídia física: cartão ou token', origem: 'FIGMA: 00.01.A2' },
+  { rota: '/duvidas-frequentes', titulo: 'Perguntas frequentes', origem: 'FIGMA: 10.00' },
+  { rota: '/ajuda/certificado-em-nuvem', titulo: 'Certificado em nuvem', origem: 'FIGMA: 01.00.A1' },
+  { rota: '/ajuda/midia-fisica', titulo: 'Mídia física: cartão ou token', origem: 'FIGMA: 01.00.A2' },
 ];
 
 type ItemHome = ItemNavegacao & { readonly home: NonNullable<ItemNavegacao['home']> };

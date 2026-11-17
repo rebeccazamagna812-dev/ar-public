@@ -30,10 +30,10 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
 
 ## ADR-05 — Estado com signals + fachada da jornada, no escopo da feature
 - **Decisão:**
-  - `SolicitacaoNuvemStore` (signals) guarda os dados e a solicitação registrada durante a jornada. Nada é persistido no navegador.
-  - `SolicitacaoNuvemJornada` (fachada) concentra as regras e decide a próxima tela: entrada na etapa 2, carga dos dados e envio. Telas e guards só chamam a fachada; só ela escreve no store.
+  - `SolicitacaoCertificadoStore` (signals) guarda a situação do certificado anterior (triagem), a modalidade, a mídia física, os dados e a solicitação registrada. Nada é persistido no navegador.
+  - `SolicitacaoCertificadoJornada` (fachada) concentra as regras e decide a próxima tela: triagem, escolha da modalidade, perguntas de mídia física, entrada na conferência, carga dos dados e envio. Telas e guards só chamam a fachada; só ela escreve no store.
   - Os dois são fornecidos em `providers` da rota da funcionalidade, não em `root`.
-- **Por quê:** a regra "sucesso → 01.04, divergência → 01.E3, falha → 01.E4" fica num lugar só e é testada sem renderizar componentes.
+- **Por quê:** os caminhos da seção 03 ("cartão → 03.04", "sem mídia → 03.02C", "sucesso → 03.N2 / 03.05", "divergência → 01.E3"…) ficam num lugar só e são testados sem renderizar componentes.
 - **Descartadas:** NgRx (desproporcional ao escopo atual); lógica dentro das páginas e dos guards (versão anterior).
 - **Origem:** `[PADRÃO DE MERCADO]`; `[DOC: RNF01]` para não guardar dado sensível.
 
@@ -47,23 +47,28 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
 - **Origem:** `[DOC: HU03a RN04/RF04, HU02 CA02, HU03c CA02]`.
 
 ## ADR-08 — Guards da jornada
-- **Decisão:** `jornadaNuvemGuard` na etapa 2 delega a `SolicitacaoNuvemJornada.verificarEntradaNuvem()`:
-  - sem elegibilidade → 01.E1;
-  - certificado em nuvem ativo → 01.E2.
+- **Decisão:** os guards (`guards/jornada.guards.ts`) só traduzem decisões da fachada em navegação e não alteram estado:
+  - `triagemConcluidaGuard`: telas depois da escolha exigem a triagem 03.00 respondida;
+  - `jornadaNuvemGuard` (03.N1): sem elegibilidade → 01.E1; certificado em nuvem ativo → 01.E2. Roda antes da triagem, para a URL direta mostrar 01.E1;
+  - `midiaFisicaDefinidaGuard` (03.04): exige a mídia informada em 03.02 ou 03.02A;
+  - `solicitacaoRegistradaGuard` (03.N2 / 03.05): exige solicitação registrada.
 
-  Guards não alteram estado. O resultado do envio (`SolicitacaoNuvemJornada.confirmar()`) decide entre 01.04, 01.E3 e 01.E4. `solicitacaoRegistradaGuard` protege 01.04.
-- **Origem:** `[FIGMA: 01.E1–01.E4]` `[DOC: HU04]`.
+  O resultado do envio (`confirmar()`) decide entre a tela de enviada, 01.E3 e 01.E4.
+- **Origem:** `[FIGMA: seção 03; 01.E1–01.E4 do fluxo anterior]` `[DOC: HU04]`.
 
-## ADR-09 — Fluxo em 2 telas + envio (sem a 01.03)
-- **Contexto:**
-  - o frame 01.03 (Revisar e confirmar) está com opacidade de 12% no Figma;
-  - no protótipo, "Confirmar solicitação" vai de 01.02 direto para 01.04;
-  - a barra mostra "Etapa 3 de 3" só na falha de envio (01.E4).
-- **Decisão:** 01.02 confirma e envia. A 01.03 não foi implementada.
-- **Origem:** `[FIGMA: 01.03 opacidade 0.12; interações do protótipo]`. Regra "Figma prevalece".
+## ADR-09 — Solicitação guiada (seção 03 do protótipo)
+- **Contexto:** o protótipo substituiu a jornada só de nuvem (seção 01 antiga) pela "03 — Solicitação guiada de certificado": triagem do certificado anterior (03.00), escolha da modalidade (03.01, 03.01A), caminho de nuvem (03.N1 → 03.N2) e de mídia física (03.02 → 03.02A/B/C → 03.04 → 03.05). As telas de etapa ("Etapa N de 3") saíram; só as de enviada têm Progress.
+- **Decisão:** implementar a seção 03 inteira, com as decisões de produto abaixo (prevalecem sobre o Figma):
+  - **01.E1–01.E4 mantidas**, embora tenham saído do protótipo; E3 e E4 valem para as duas modalidades (`/solicitar/interrompida/:motivo`);
+  - **elegibilidade**: a nuvem continua oculta para quem não é elegível; simulação `?cenario=nao-elegivel` (o protótipo sempre mostra as duas);
+  - **CPF mascarado** [DOC: RNF01] (o protótipo mostra o CPF completo);
+  - **03.00b** (autorização de segundo certificado) **não implementada**: ainda em discussão;
+  - **"Voltar ao início"** nas telas de enviada recomeça a solicitação (no protótipo, volta uma tela).
+- **Telas reaproveitadas:** uma `Pergunta` (03.02, 03.02A) e uma `Orientacao` (03.02B, 03.02C) guiadas por configuração; `ConferirDados` e `SolicitacaoEnviada` recebem a modalidade pelo `data` da rota.
+- **Origem:** `[FIGMA: Fluxo V1 (em andamento) → 03]` + decisões de produto. Diagrama: `docs/jornada-solicitacao.md`.
 
 ## ADR-10 — Solicitação registrada só após retorno do SERPRO
-- **Decisão:** o front só considera a solicitação criada quando a API retorna a referência. Em indisponibilidade, nada é registrado e o usuário tenta de novo.
+- **Decisão:** o front só considera a solicitação criada quando a API retorna a referência. Em indisponibilidade, nada é registrado e o usuário tenta de novo ("Tentar novamente" volta à conferência da modalidade em curso).
 - **Origem:** `[FIGMA: 01.03 "Antes de confirmar", 01.E4]`. Prevalece sobre `[DOC: HU08 RF05, HU09]`.
 
 ## ADR-11 — Change detection
@@ -87,3 +92,10 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
 - **Decisão:** regras `no-restricted-imports` por pasta em `eslint.config.js` (tabela no README → "Fronteiras entre camadas"). Telas genéricas reutilizadas por várias rotas, como o placeholder, ficam em `shared/paginas/`.
 - **Descartadas:** `eslint-plugin-boundaries` (dependência extra para um conjunto pequeno de regras); só convenção escrita (não impede regressão).
 - **Origem:** `[PADRÃO DE MERCADO]`.
+
+## ADR-14 — Jornada reiniciada ao entrar na funcionalidade
+- **Contexto:** o protótipo abre a triagem 03.00 sempre que a pessoa entra em "Solicitar certificado" (Home ou menu), mas não quando volta à escolha de dentro da jornada ("Rever modalidade", "Voltar").
+- **Decisão:** `iniciarJornadaResolver`, na rota pai da funcionalidade, chama `reiniciar()` da fachada. Resolvers da rota pai só rodam ao entrar na funcionalidade, não ao navegar entre as telas filhas. "Voltar ao início" (telas de enviada) reinicia explicitamente.
+- **Exceção registrada:** é o único ponto de rota que altera estado (ver ADR-08).
+- **Descartadas:** reiniciar no `ngOnInit` da escolha (reabriria a triagem a cada "Voltar"); estado no componente (os guards não o enxergariam).
+- **Origem:** `[FIGMA: interações do protótipo — Home/menu → 03.00; "Rever modalidade" → 03.01]`.

@@ -90,6 +90,7 @@
           "options": {
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
+            "include": ["**/*.spec.ts", "../projects/**/*.spec.ts"],
             "assets": [
               {
                 "glob": "**/*",

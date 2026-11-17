@@ -74,6 +74,19 @@
   padding-top: var(--dsc-spacing-smaller);
 }
 
+/* Ações logo depois do conteúdo, e não fixadas no rodapé [FIGMA: seção 03 — 03.01, 03.02, 03.N1…] */
+.pagina__acoes--apos-conteudo {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Bloco de texto com título de seção [FIGMA: [dsc] Text style=title, size=small, emphasis=true + body standard] */
+.pagina__secao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dsc-spacing-micro);
+}
+
 @media (max-width: 767px) {
   .pagina__cabecalho {
     flex-wrap: wrap;

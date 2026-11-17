@@ -14,12 +14,7 @@
 
 <div class="pagina__acoes">
   <a dscButton appearance="outline" [routerLink]="rotaInicio">Voltar</a>
-  <a
-    dscButton
-    appearance="plain"
-    [routerLink]="rotaInicio"
-    [queryParams]="c.acaoPrincipal.modalidadeNuvem ? paramNuvem : {}"
-  >
+  <a dscButton appearance="plain" [routerLink]="acaoPrincipal().url" [queryParams]="acaoPrincipal().query">
     {{ c.acaoPrincipal.rotulo }}
   </a>
 </div>

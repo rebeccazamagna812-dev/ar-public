@@ -27,7 +27,7 @@ import { ITENS_NAVEGACAO } from '@core/navegacao/navegacao';
 
 /**
  * Shell da aplicação: Header, Menu lateral (overlay), menu da conta, área de conteúdo e Footer.
- * [FIGMA: Fluxo V1 (em andamento) 2 → 00 — Navegação global (OV — Menu lateral, OV — Conta do usuário); frame "Conteúdo"]
+ * [FIGMA: Fluxo V1 (em andamento) → 00 — Navegação global (OV — Menu lateral, OV — Conta do usuário); frame "Conteúdo"]
  */
 @Component({
   selector: 'app-shell',

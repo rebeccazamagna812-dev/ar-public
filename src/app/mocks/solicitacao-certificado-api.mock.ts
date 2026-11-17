@@ -13,7 +13,7 @@ const LATENCIA_MS = 400;
 
 /**
  * Implementação SIMULADA da API, sem backend.
- * Os dados de exemplo são os mesmos exibidos no Figma [FIGMA: 01.02, 01.04].
+ * Os dados de exemplo são os mesmos exibidos no Figma [FIGMA: 03.N1, 03.N2].
  * Escolha um cenário pela URL, por exemplo: http://localhost:4200/?cenario=serpro-indisponivel
  */
 @Injectable()
@@ -33,13 +33,13 @@ export class SolicitacaoCertificadoMockApi extends SolicitacaoCertificadoApi {
       nomeCompleto: 'João da Silva',
       cpf: '12345678910',
       matricula: 'C000000',
-      documentoIdentidade: 'RG 1.123.456.15 ISP/GO',
       emailCorporativo: 'nome.sobrenome@caixa.gov.br',
       dataNascimento: '1990-01-01',
     }).pipe(delay(LATENCIA_MS));
   }
 
-  enviarSolicitacaoNuvem(): Observable<ResultadoEnvioSolicitacao> {
+  /** Os cenários de envio valem para as duas modalidades. */
+  enviarSolicitacao(): Observable<ResultadoEnvioSolicitacao> {
     let resultado: ResultadoEnvioSolicitacao;
     switch (this.cenario) {
       case 'divergencia-cadastral':

@@ -3,8 +3,30 @@
  * Os campos vêm apenas do que está visível no Figma ou escrito na documentação. Nada foi inventado.
  */
 
-/** Modalidades de certificado [DOC: HU01/HU02] [FIGMA: 01.01 — "Certificado em nuvem" / "Certificado para mídia física"]. */
+/** Modalidades de certificado [DOC: HU01/HU02] [FIGMA: 03.01 — "Em nuvem" / "Em mídia física"]. */
 export type ModalidadeCertificado = 'nuvem' | 'midia-fisica';
+
+/**
+ * Situação do certificado anterior, respondida antes de escolher a modalidade
+ * [FIGMA: 03.00 — "Antes de solicitar seu certificado"].
+ * Só `valido-nao-revogado` impede seguir: é preciso revogar o certificado vigente antes [FIGMA: 03.00; 10.04.03].
+ */
+export type SituacaoCertificadoAnterior = 'primeiro' | 'revogado' | 'vencido' | 'valido-nao-revogado';
+
+/**
+ * Mídia física que guardará o certificado [FIGMA: 03.02 — Informar mídia existente; 03.02A — Consultar estoque].
+ * - cartao / token: o empregado já possui a mídia;
+ * - disponibilizada-pela-unidade: a área ou o gestor confirmou uma mídia disponível na unidade.
+ * O pedido é só do certificado: nenhuma mídia é enviada [FIGMA: 03.04 — "Este pedido não inclui uma nova mídia"].
+ */
+export type MidiaFisica = 'cartao' | 'token' | 'disponibilizada-pela-unidade';
+
+/**
+ * Pedido de certificado enviado ao SERPRO.
+ * [PENDENTE] Contrato real; também não está definido se a situação do certificado anterior (03.00) vai no pedido.
+ */
+export type PedidoCertificado =
+  { readonly modalidade: 'nuvem' } | { readonly modalidade: 'midia-fisica'; readonly midia: MidiaFisica };
 
 /**
  * Resultado da avaliação de elegibilidade feita após o login [DOC: HU03a, HU03c].
@@ -17,21 +39,19 @@ export interface Elegibilidade {
 }
 
 /**
- * Dados cadastrais obtidos do IntegraMais (RH), somente leitura [FIGMA: 01.02 — Confira seus dados] [DOC: HU05].
+ * Dados cadastrais obtidos do IntegraMais (RH), somente leitura [FIGMA: 03.N1, 03.04 — Confira seus dados] [DOC: HU05].
  * [PENDENTE] Formato real do contrato da API.
  */
 export interface DadosCadastrais {
   readonly nomeCompleto: string;
   readonly cpf: string;
   readonly matricula: string;
-  /** Ex.: "RG 1.123.456.15 ISP/GO" [FIGMA: 01.02 — Documento de Identidade]. */
-  readonly documentoIdentidade: string;
   readonly emailCorporativo: string;
   /** Data no formato ISO (AAAA-MM-DD). */
   readonly dataNascimento: string;
 }
 
-/** Retorno de uma solicitação registrada com sucesso [FIGMA: 01.04 — Referência, e-mail do SERPRO]. */
+/** Retorno de uma solicitação registrada com sucesso [FIGMA: 03.N2 / 03.05 — Referência, e-mail do SERPRO]. */
 export interface SolicitacaoRegistrada {
   readonly referencia: string;
   /** E-mail para onde o SERPRO envia a mensagem de validação de identidade. */
@@ -39,7 +59,7 @@ export interface SolicitacaoRegistrada {
 }
 
 /**
- * Motivos que interrompem a jornada [FIGMA: 01.E1–01.E4].
+ * Motivos que interrompem a jornada [FIGMA (fluxo anterior): 01.E1–01.E4, mantidas por decisão de produto].
  * - nao-elegivel: empregado sem elegibilidade à nuvem [DOC: HU02 CA02, HU03c]
  * - certificado-ativo: já existe certificado em nuvem ativo [DOC: HU04]
  * - divergencia-cadastral: divergência entre dados CAIXA e SERPRO [FIGMA: 01.E3]

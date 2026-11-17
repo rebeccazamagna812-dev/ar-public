@@ -40,7 +40,7 @@ Em `src/app/app.routes.ts`, dentro dos filhos do `Shell`:
   As telas dependem só do contrato.
 
 ## 5. Testes
-- Fachada: um teste por decisão de negócio (veja `solicitacao-nuvem.jornada.spec.ts`).
+- Fachada: um teste por decisão de negócio (veja `solicitacao-certificado.jornada.spec.ts`).
 - Página: regras visíveis, como o que aparece, o que fica desabilitado e para onde navega (veja `escolher-modalidade.spec.ts`).
 
 ## 6. Rastreabilidade

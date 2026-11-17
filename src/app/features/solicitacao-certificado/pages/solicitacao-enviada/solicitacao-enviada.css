@@ -1,7 +1,10 @@
-.proximo-passo__titulo {
-  font: inherit;
+/* [FIGMA: 03.N2 / 03.05 — ilustração centralizada abaixo do Progress, seguida da lista de orientações] */
+.enviada__mensagem {
+  padding-top: calc(var(--dsc-spacing-big) + var(--dsc-spacing-smaller));
 }
 
-.pagina__feedback strong {
-  font-weight: var(--dsc-font-weight-600);
+/* [FIGMA: "Confirmação — dados em lista oficial" — [dsc] List Item empilhados, gap 0] */
+.enviada__lista {
+  display: flex;
+  flex-direction: column;
 }

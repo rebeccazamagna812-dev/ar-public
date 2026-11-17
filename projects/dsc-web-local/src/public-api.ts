@@ -26,3 +26,6 @@ export * from './lib/footer/footer';
 export * from './lib/account-select/account-select';
 export * from './lib/dropdown/dropdown';
 export * from './lib/sidebar-menu/sidebar-menu';
+export * from './lib/title-bar/title-bar';
+export * from './lib/modal/modal';
+export * from './lib/list-item/list-item';
