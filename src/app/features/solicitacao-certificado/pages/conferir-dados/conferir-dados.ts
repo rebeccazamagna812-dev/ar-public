@@ -7,12 +7,12 @@ import { DscButton, DscCardAlert, DscProgress, DscTextFieldForm } from '@dsc/web
 import { MascaraCpfPipe } from '@shared/pipes/mascara-cpf.pipe';
 import { ETAPAS_JORNADA } from '../../solicitacao-certificado.etapas';
 import { PARAM_MODALIDADE, ROTAS_SOLICITACAO } from '../../solicitacao-certificado.paths';
-import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
+import { SolicitacaoCertificadoJornada } from '../../state/solicitacao-certificado.jornada';
 
 /**
  * Etapa 2 de 3 — Confira seus dados e confirme. [FIGMA: 01.02 — Conferir dados]
  * - Dados do IntegraMais, somente leitura; para corrigir, Portal IntegraMais [FIGMA: 01.02] [DOC: HU05].
- * - "Confirmar solicitação" envia ao SERPRO; a próxima tela é decidida por SolicitacaoNuvemJornada.confirmar().
+ * - "Confirmar solicitação" envia ao SERPRO; a próxima tela é decidida por SolicitacaoCertificadoJornada.confirmar().
  */
 @Component({
   selector: 'app-conferir-dados',
@@ -23,7 +23,7 @@ import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
   styleUrl: './conferir-dados.css',
 })
 export class ConferirDados {
-  private readonly jornada = inject(SolicitacaoNuvemJornada);
+  private readonly jornada = inject(SolicitacaoCertificadoJornada);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
 

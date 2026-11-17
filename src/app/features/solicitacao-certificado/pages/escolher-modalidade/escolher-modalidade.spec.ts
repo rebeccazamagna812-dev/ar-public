@@ -2,13 +2,13 @@ import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Router, provideRouter } from '@angular/router';
 import { ElegibilidadeService } from '@domain/certificado/elegibilidade.service';
-import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
+import { SolicitacaoCertificadoJornada } from '../../state/solicitacao-certificado.jornada';
 import { EscolherModalidade } from './escolher-modalidade';
 
 /** Etapa 1 [FIGMA: 01.01 / 01.01A] [DOC: HU02 CA02, HU03a CA02, HU03c CA02]. */
 describe('EscolherModalidade', () => {
   function renderizar(opcoes: { nuvem?: boolean; midiaFisica?: boolean; falhou?: boolean; modalidade?: string } = {}) {
-    const reiniciar = jasmine.createSpy('reiniciar');
+    const escolherModalidade = jasmine.createSpy('escolherModalidade').and.returnValue('/solicitar/nuvem/dados');
     TestBed.configureTestingModule({
       imports: [EscolherModalidade],
       providers: [
@@ -21,7 +21,7 @@ describe('EscolherModalidade', () => {
             falhou: signal(opcoes.falhou ?? false),
           },
         },
-        { provide: SolicitacaoNuvemJornada, useValue: { reiniciar } },
+        { provide: SolicitacaoCertificadoJornada, useValue: { escolherModalidade } },
       ],
     });
     const fixture = TestBed.createComponent(EscolherModalidade);
@@ -32,13 +32,8 @@ describe('EscolherModalidade', () => {
     const el = fixture.nativeElement as HTMLElement;
     const botao = (texto: string) =>
       Array.from(el.querySelectorAll('button')).find((b) => b.textContent?.trim() === texto) ?? null;
-    return { fixture, el, botao, reiniciar };
+    return { fixture, el, botao, escolherModalidade };
   }
-
-  it('recomeça a jornada ao abrir', () => {
-    const { reiniciar } = renderizar();
-    expect(reiniciar).toHaveBeenCalled();
-  });
 
   it('mostra as duas modalidades e "Continuar" desabilitado, sem "Voltar", quando nada foi escolhido', () => {
     const { el, botao } = renderizar();
@@ -60,11 +55,12 @@ describe('EscolherModalidade', () => {
   });
 
   it('pré-seleciona a nuvem com ?modalidade=nuvem e segue para a etapa 2 ao continuar', () => {
-    const { botao } = renderizar({ modalidade: 'nuvem' });
+    const { botao, escolherModalidade } = renderizar({ modalidade: 'nuvem' });
     const navegar = spyOn(TestBed.inject(Router), 'navigateByUrl').and.resolveTo(true);
     const continuar = botao('Continuar');
     expect(continuar?.disabled).toBeFalse();
     continuar?.click();
+    expect(escolherModalidade).toHaveBeenCalledWith('nuvem');
     expect(navegar).toHaveBeenCalledWith('/solicitar/nuvem/dados');
   });
 });

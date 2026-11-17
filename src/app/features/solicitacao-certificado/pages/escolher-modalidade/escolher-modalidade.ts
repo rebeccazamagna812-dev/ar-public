@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, inject, input, linkedSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DscButton, DscCard, DscCardAlert, DscProgress, DscRadio } from '@dsc/web';
 import { ElegibilidadeService } from '@domain/certificado/elegibilidade.service';
 import { ModalidadeCertificado } from '@domain/certificado/solicitacao-certificado.models';
 import { ETAPAS_JORNADA } from '../../solicitacao-certificado.etapas';
-import { ROTAS_SOLICITACAO } from '../../solicitacao-certificado.paths';
-import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
+import { SolicitacaoCertificadoJornada } from '../../state/solicitacao-certificado.jornada';
 
 /**
  * Etapa 1 de 3 — Escolher modalidade.
@@ -23,9 +22,9 @@ import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
   templateUrl: './escolher-modalidade.html',
   styleUrl: './escolher-modalidade.css',
 })
-export class EscolherModalidade implements OnInit {
+export class EscolherModalidade {
   private readonly router = inject(Router);
-  private readonly jornada = inject(SolicitacaoNuvemJornada);
+  private readonly jornada = inject(SolicitacaoCertificadoJornada);
   private readonly elegibilidade = inject(ElegibilidadeService);
 
   /** Query param `modalidade` (withComponentInputBinding). */
@@ -52,11 +51,6 @@ export class EscolherModalidade implements OnInit {
         },
   );
 
-  ngOnInit(): void {
-    // Voltar a esta etapa recomeça a jornada.
-    this.jornada.reiniciar();
-  }
-
   protected selecionar(modalidade: string): void {
     if (modalidade === 'nuvem' || modalidade === 'midia-fisica') {
       this.selecionada.set(modalidade);
@@ -72,8 +66,6 @@ export class EscolherModalidade implements OnInit {
     if (!modalidade) {
       return;
     }
-    void this.router.navigateByUrl(
-      modalidade === 'nuvem' ? ROTAS_SOLICITACAO.dadosNuvem : ROTAS_SOLICITACAO.midiaFisica,
-    );
+    void this.router.navigateByUrl(this.jornada.escolherModalidade(modalidade));
   }
 }

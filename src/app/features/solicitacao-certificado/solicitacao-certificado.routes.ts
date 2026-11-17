@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { ResolveFn, Router, Routes } from '@angular/router';
 import { INTERRUPCOES, isMotivoInterrupcao } from './pages/interrupcao/interrupcoes';
-import { jornadaNuvemGuard, solicitacaoRegistradaGuard } from './guards/jornada-nuvem.guard';
+import { iniciarJornadaResolver, jornadaNuvemGuard, solicitacaoRegistradaGuard } from './guards/jornada.guards';
 import { ROTAS_SOLICITACAO, SEGMENTOS_SOLICITACAO } from './solicitacao-certificado.paths';
-import { SolicitacaoNuvemJornada } from './state/solicitacao-nuvem.jornada';
-import { SolicitacaoNuvemStore } from './state/solicitacao-nuvem.store';
+import { SolicitacaoCertificadoJornada } from './state/solicitacao-certificado.jornada';
+import { SolicitacaoCertificadoStore } from './state/solicitacao-certificado.store';
 
 const tituloInterrupcao: ResolveFn<string> = (route) => {
   const motivo = route.paramMap.get('motivo');
@@ -36,7 +36,7 @@ const PAGINAS: Routes = [
     loadComponent: () => import('./pages/conferir-dados/conferir-dados').then((m) => m.ConferirDados),
   },
   {
-    path: SEGMENTOS_SOLICITACAO.enviada,
+    path: SEGMENTOS_SOLICITACAO.enviadaNuvem,
     title: 'Solicitação enviada',
     canActivate: [solicitacaoRegistradaGuard],
     loadComponent: () => import('./pages/solicitacao-enviada/solicitacao-enviada').then((m) => m.SolicitacaoEnviada),
@@ -61,7 +61,8 @@ const PAGINAS: Routes = [
 export const SOLICITACAO_CERTIFICADO_ROUTES: Routes = [
   {
     path: '',
-    providers: [SolicitacaoNuvemStore, SolicitacaoNuvemJornada],
+    providers: [SolicitacaoCertificadoStore, SolicitacaoCertificadoJornada],
+    resolve: { jornada: iniciarJornadaResolver },
     children: PAGINAS,
   },
 ];
