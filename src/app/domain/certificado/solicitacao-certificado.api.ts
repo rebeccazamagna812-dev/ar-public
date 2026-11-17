@@ -1,19 +1,15 @@
 import { Observable } from 'rxjs';
-import {
-  DadosCadastrais,
-  Elegibilidade,
-  ResultadoEnvioSolicitacao,
-} from '@core/models/solicitacao-certificado.models';
+import { DadosCadastrais, Elegibilidade, ResultadoEnvioSolicitacao } from './solicitacao-certificado.models';
 
 /**
  * Contrato de acesso ao backend do SIARX para a jornada de solicitação.
  *
  * É uma classe abstrata usada como token de injeção: as telas dependem só deste contrato.
- * Hoje a implementação registrada é a simulada (mock/solicitacao-certificado.mock-api.ts).
+ * Hoje a implementação registrada é a simulada (src/app/mocks/solicitacao-certificado.mock-api.ts).
  *
  * [PENDENTE] Endpoints, formato de erro e paginação do backend não estão definidos na documentação.
  * Quando estiverem, crie uma implementação HTTP (ex.: solicitacao-certificado.http-api.ts) e troque o provider
- * em app.config.ts. Nenhuma tela precisa mudar.
+ * em core/providers/siarx.providers.ts. Nenhuma tela precisa mudar.
  */
 export abstract class SolicitacaoCertificadoApi {
   /** Elegibilidade por modalidade, avaliada após o login [DOC: HU03a RF04]. */

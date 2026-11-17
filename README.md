@@ -48,8 +48,10 @@ siarx-front/
 │  ├─ styles.css                    estilos globais mínimos (só tokens)
 │  └─ app/
 │     ├─ app.ts · app.config.ts · app.routes.ts
-│     ├─ core/                      singletons: api (contrato + mock), auth, elegibilidade,
-│     │                             erros, http (interceptor), navegação, modelos
+│     ├─ core/                      infraestrutura transversal: auth (contrato), http (interceptor), erros,
+│     │                             navegação (menu/Home/rotas futuras), providers (troca mock ↔ real)
+│     ├─ domain/certificado/        modelos, contrato da API e elegibilidade, usados por mais de uma feature
+│     ├─ mocks/                     API e autenticação simuladas (cenários por ?cenario=)
 │     ├─ layout/shell/              Header + Menu lateral + Conta + Conteúdo + Footer
 │     ├─ shared/                    ui/card-acesso (componente local), pipes, styles/pagina.css (global)
 │     └─ features/
@@ -62,7 +64,7 @@ siarx-front/
    └─ rastreabilidade.md            matriz Item | Arquivo | Origem + pendências
 ```
 
-Aliases (`tsconfig.json`): `@core/*`, `@shared/*`, `@layout/*`, `@features/*`, `@env/*`, `@dsc/web`.
+Aliases (`tsconfig.json`): `@core/*`, `@domain/*`, `@mocks/*`, `@shared/*`, `@layout/*`, `@features/*`, `@env/*`, `@dsc/web`.
 
 ---
 

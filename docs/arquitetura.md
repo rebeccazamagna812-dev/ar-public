@@ -19,8 +19,13 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
 - **Decisão:** `tokens.css` com os tokens da coleção `dsc` (modos Light e Dark), exceto os de gráfico e a escala de cinza, com os nomes exatos do Code Syntax WEB (`--dsc-color-highlight`, `--dsc-spacing-tiny`…). Estilos de texto viram classes `dsc-typography-*`.
 - **Origem:** `[FIGMA: Super DSC | Web → coleção "dsc", estilos "typography/*", "Shadows | Elevations"]`.
 
-## ADR-04 — Organização por domínio
-- **Decisão:** `core/` (singletons, contratos, guards globais, erros), `layout/` (shell), `shared/` (ui, pipes, estilos de página), `features/<funcionalidade>/` com rotas próprias e lazy loading.
+## ADR-04 — Organização por camadas e domínio
+- **Decisão:**
+  - `core/`: infraestrutura transversal e composição da aplicação (auth, http, erros, navegação, providers);
+  - `domain/<assunto>/`: modelos, contratos de API e serviços de regra usados por mais de uma feature;
+  - `mocks/`: implementações simuladas dos contratos;
+  - `layout/` (shell), `shared/` (ui, pipes, estilos de página);
+  - `features/<funcionalidade>/`: rotas próprias, lazy loading, estado e páginas. O que só uma feature usa fica nela.
 - **Origem:** `[PADRÃO DE MERCADO]` + diretriz do projeto.
 
 ## ADR-05 — Estado com signals + fachada da jornada, no escopo da feature
@@ -34,11 +39,11 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
 
 ## ADR-06 — API e autenticação por contrato (classe abstrata) + implementação simulada
 - **Contexto:** a documentação não define autenticação, endpoints nem formato de erro.
-- **Decisão:** as telas dependem de `SolicitacaoCertificadoApi` e `AutenticacaoService`. Hoje são registradas as implementações *mock*, com cenários escolhidos por `?cenario=`. A implementação HTTP entra só em `app.config.ts`.
+- **Decisão:** as telas dependem de `SolicitacaoCertificadoApi` e `AutenticacaoService`. Hoje são registradas as implementações *mock* (`src/app/mocks/`), com cenários escolhidos por `?cenario=`. A implementação HTTP entra só em `core/providers/siarx.providers.ts` (`provideImplementacoes`).
 - **Origem:** `[PENDENTE]` (Fase 1, itens 2–4); `[PADRÃO DE MERCADO]` para o padrão de troca.
 
 ## ADR-07 — Elegibilidade carregada no bootstrap
-- **Decisão:** `provideAppInitializer` inicia a sessão e carrega a elegibilidade antes da primeira tela. A modalidade inelegível **não é exibida**.
+- **Decisão:** `provideSessaoInicial()` (`provideAppInitializer`) inicia a sessão e carrega a elegibilidade antes da primeira tela. A modalidade inelegível **não é exibida**.
 - **Origem:** `[DOC: HU03a RN04/RF04, HU02 CA02, HU03c CA02]`.
 
 ## ADR-08 — Guards da jornada

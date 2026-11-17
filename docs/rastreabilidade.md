@@ -19,10 +19,10 @@
 | Card de acesso (local) | `shared/ui/card-acesso/card-acesso.ts` | `[FIGMA: AR-CAIXA / Card de acesso]` |
 | Etapa 1: escolher modalidade, Continuar desabilitado sem seleção | `pages/escolher-modalidade/*` | `[FIGMA: 01.01, 01.01A]` |
 | Ocultar modalidade inelegível | `escolher-modalidade.html` | `[DOC: HU02 CA02, HU03a CA02, HU03c CA02]` |
-| Elegibilidade no login | `app.config.ts`, `core/elegibilidade/*` | `[DOC: HU03a RN04/RF04]` |
+| Elegibilidade no login | `core/providers/siarx.providers.ts`, `domain/certificado/elegibilidade.service.ts` | `[DOC: HU03a RN04/RF04]` |
 | Etapa 2: dados IntegraMais somente leitura | `pages/conferir-dados/*` | `[FIGMA: 01.02]` `[DOC: HU05]` |
 | CPF mascarado | `shared/pipes/mascara-cpf.pipe.ts` | `[FIGMA: 01.02]` `[DOC: RNF01]` |
-| Envio ao SERPRO; registro só após retorno | `core/api/*`, `conferir-dados.ts` | `[FIGMA: 01.03 texto, 01.E4]` |
+| Envio ao SERPRO; registro só após retorno | `domain/certificado/*`, `mocks/*`, `solicitacao-nuvem.jornada.ts` | `[FIGMA: 01.03 texto, 01.E4]` |
 | Solicitação enviada + próximo passo (e-mail) | `pages/solicitacao-enviada/*` | `[FIGMA: 01.04]` |
 | Não elegível | `pages/interrupcao/interrupcoes.ts`, guard | `[FIGMA: 01.E1]` |
 | Certificado em nuvem ativo | `interrupcoes.ts`, guard | `[FIGMA: 01.E2]` `[DOC: HU04]` |

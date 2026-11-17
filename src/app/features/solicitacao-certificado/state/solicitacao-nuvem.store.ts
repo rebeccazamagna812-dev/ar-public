@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { DadosCadastrais, SolicitacaoRegistrada } from '@core/models/solicitacao-certificado.models';
+import { DadosCadastrais, SolicitacaoRegistrada } from '@domain/certificado/solicitacao-certificado.models';
 
 /**
  * Estado da jornada de solicitação, feito com signals. Sobrevive à troca de rotas dentro da jornada.

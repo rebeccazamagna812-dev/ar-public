@@ -1,5 +1,5 @@
 import { DscIllustrationName } from '@dsc/web';
-import { MotivoInterrupcao } from '@core/models/solicitacao-certificado.models';
+import { MotivoInterrupcao } from '@domain/certificado/solicitacao-certificado.models';
 import { ETAPAS_JORNADA, EtapaJornada } from '../../solicitacao-certificado.etapas';
 
 /** Conteúdo de cada tela de interrupção da jornada, copiado do Figma. */

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject, input, linkedSignal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DscButton, DscCard, DscCardAlert, DscProgress, DscRadio } from '@dsc/web';
-import { ElegibilidadeService } from '@core/elegibilidade/elegibilidade.service';
-import { ModalidadeCertificado } from '@core/models/solicitacao-certificado.models';
+import { ElegibilidadeService } from '@domain/certificado/elegibilidade.service';
+import { ModalidadeCertificado } from '@domain/certificado/solicitacao-certificado.models';
 import { ETAPAS_JORNADA } from '../../solicitacao-certificado.etapas';
 import { ROTAS_SOLICITACAO } from '../../solicitacao-certificado.paths';
 import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';

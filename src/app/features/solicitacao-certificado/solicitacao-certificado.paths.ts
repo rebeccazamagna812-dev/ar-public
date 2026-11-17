@@ -1,4 +1,4 @@
-import { MotivoInterrupcao } from '@core/models/solicitacao-certificado.models';
+import { MotivoInterrupcao } from '@domain/certificado/solicitacao-certificado.models';
 
 /**
  * Fonte única dos caminhos da funcionalidade "Solicitar certificado".

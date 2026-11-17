@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
-import { SolicitacaoCertificadoApi } from '@core/api/solicitacao-certificado.api';
-import { ElegibilidadeService } from '@core/elegibilidade/elegibilidade.service';
-import { DadosCadastrais } from '@core/models/solicitacao-certificado.models';
+import { SolicitacaoCertificadoApi } from '@domain/certificado/solicitacao-certificado.api';
+import { ElegibilidadeService } from '@domain/certificado/elegibilidade.service';
+import { DadosCadastrais } from '@domain/certificado/solicitacao-certificado.models';
 import { ROTAS_SOLICITACAO } from '../solicitacao-certificado.paths';
 import { SolicitacaoNuvemStore } from './solicitacao-nuvem.store';
 

@@ -1,9 +1,9 @@
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable, firstValueFrom, of, throwError } from 'rxjs';
-import { SolicitacaoCertificadoApi } from '@core/api/solicitacao-certificado.api';
-import { ElegibilidadeService } from '@core/elegibilidade/elegibilidade.service';
-import { ResultadoEnvioSolicitacao } from '@core/models/solicitacao-certificado.models';
+import { SolicitacaoCertificadoApi } from '@domain/certificado/solicitacao-certificado.api';
+import { ElegibilidadeService } from '@domain/certificado/elegibilidade.service';
+import { ResultadoEnvioSolicitacao } from '@domain/certificado/solicitacao-certificado.models';
 import { SolicitacaoNuvemJornada } from './solicitacao-nuvem.jornada';
 import { SolicitacaoNuvemStore } from './solicitacao-nuvem.store';
 
