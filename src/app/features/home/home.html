@@ -1,0 +1,34 @@
+<header class="home__cabecalho">
+  <h1 class="pagina__titulo">Certificados digitais</h1>
+  <p class="home__subtitulo">Escolha uma opção para acessar os serviços de certificados digitais.</p>
+</header>
+
+<nav aria-label="Serviços de certificados digitais">
+  <ul class="home__acessos" role="list">
+    @for (card of cards; track card.rota) {
+      <li>
+        <app-card-acesso
+          [rota]="card.rota"
+          [icone]="card.icone"
+          [titulo]="card.home.titulo"
+          [descricao]="card.home.descricao"
+        />
+      </li>
+    }
+  </ul>
+</nav>
+
+<section class="home__ajuda" aria-label="Entenda seu certificado">
+  <dsc-card-alert title="Certificado em nuvem" icon="smartphone-device">
+    Seu certificado fica no SERPRO. Você autoriza o uso pelo celular, sem carregar cartão ou token.
+    <a dscCardAlertAction dscButton appearance="chromeless" size="small" iconRight="nav-arrow-right" routerLink="/ajuda/certificado-em-nuvem">
+      Saiba mais<span class="dsc-visually-hidden"> sobre certificado em nuvem</span>
+    </a>
+  </dsc-card-alert>
+  <dsc-card-alert title="Mídia física: cartão ou token" icon="card-shield">
+    Dois dispositivos da mesma modalidade: cartão com leitora ou token conectado à USB.
+    <a dscCardAlertAction dscButton appearance="chromeless" size="small" iconRight="nav-arrow-right" routerLink="/ajuda/midia-fisica">
+      Saiba mais<span class="dsc-visually-hidden"> sobre mídia física</span>
+    </a>
+  </dsc-card-alert>
+</section>

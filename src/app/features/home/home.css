@@ -1,0 +1,50 @@
+/* [FIGMA: 00.01 — Home] */
+.home__cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dsc-spacing-micro);
+}
+
+.home__subtitulo {
+  color: var(--dsc-color-on-neutral-2);
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-nano);
+  line-height: var(--dsc-font-line-height-20);
+  letter-spacing: var(--dsc-font-letter-spacing-broad);
+}
+
+/* Grade 3 × 3 [FIGMA: "Acessos da Home" — colunas com gap 24, linhas com gap 16] */
+.home__acessos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--dsc-spacing-tiny) var(--dsc-spacing-smaller);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.home__acessos > li {
+  display: flex;
+}
+.home__acessos app-card-acesso {
+  flex: 1;
+}
+
+/* [FIGMA: "Entenda seu certificado — ajuda na Home" — 2 colunas, gap 24, padding vertical 16] */
+.home__ajuda {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--dsc-spacing-smaller);
+  padding: var(--dsc-spacing-tiny) 0;
+}
+
+@media (max-width: 1023px) {
+  .home__acessos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .home__acessos,
+  .home__ajuda {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

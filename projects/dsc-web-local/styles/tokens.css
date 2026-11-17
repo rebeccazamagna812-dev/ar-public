@@ -1,0 +1,295 @@
+/*
+ * Super DSC | Web — tokens (CÓPIA LOCAL)
+ * Origem: [FIGMA: Super DSC | Web → coleção de variáveis "dsc", Code Syntax WEB; modos Light e Dark]
+ * Os nomes seguem exatamente o Code Syntax WEB publicado no Figma do DSC.
+ * Inclusive a grafia "--dsc-color-on-informantion-bg", que é a do DSC.
+ * Quando a biblioteca oficial estiver acessível, este arquivo deve ser removido:
+ * os tokens passam a vir do pacote do DSC.
+ */
+
+:root,
+.dsc-theme-light {
+  /* Cores — highlight (Azul CX) */
+  --dsc-color-highlight: #005ca9;
+  --dsc-color-on-highlight: #ffffff;
+  --dsc-color-highlight-bg: #e5f2fc;
+  --dsc-color-on-highlight-bg: #00437a;
+  --dsc-color-highlight-outlined: #cce6fc;
+
+  /* Cores — accent */
+  --dsc-color-accent: #d87b00;
+  --dsc-color-on-accent: #ffffff;
+  --dsc-color-accent-bg: #ffefd6;
+  --dsc-color-on-accent-bg: #804800;
+  --dsc-color-accent-outlined: #ffe3b8;
+
+  /* Cores — decorative */
+  --dsc-color-decorative: #216e62;
+  --dsc-color-on-decorative: #ffffff;
+  --dsc-color-decorative-bg: #e4f7f4;
+  --dsc-color-on-decorative-bg: #03453b;
+  --dsc-color-decorative-outlined: #d0f2ed;
+
+  /* Cores — neutral */
+  --dsc-color-neutral-bg-1: #ffffff;
+  --dsc-color-neutral-bg-2: #f0f2f2;
+  --dsc-color-neutral-bg-3: #e3ebeb;
+  --dsc-color-neutral-bg-4: #d0e0e3;
+  --dsc-color-neutral-bg-alt: #ffffff;
+  --dsc-color-on-neutral-1: #22292e;
+  --dsc-color-on-neutral-2: #525f66;
+  --dsc-color-on-neutral-3: #64747a;
+  --dsc-color-neutral-bg-inv: #22292e;
+  --dsc-color-on-neutral-inv: #ffffff;
+  --dsc-color-outlined-1: #d0e0e3;
+  --dsc-color-outlined-2: #9eb2b8;
+  --dsc-color-background: #f7fafa;
+
+  /* Cores — feedback */
+  --dsc-color-success: #127527;
+  --dsc-color-on-success: #ffffff;
+  --dsc-color-success-bg: #e7f4ea;
+  --dsc-color-on-success-bg: #0d581d;
+  --dsc-color-success-outlined: #c5e4cc;
+  --dsc-color-warning: #977203;
+  --dsc-color-on-warning: #ffffff;
+  --dsc-color-warning-bg: #fff9e6;
+  --dsc-color-on-warning-bg: #654c02;
+  --dsc-color-warning-outlined: #fff0c2;
+  --dsc-color-danger: #b22c2c;
+  --dsc-color-on-danger: #ffffff;
+  --dsc-color-danger-bg: #fbebeb;
+  --dsc-color-on-danger-bg: #8c2424;
+  --dsc-color-danger-outlined: #f5cdcd;
+  --dsc-color-information: #038299;
+  --dsc-color-on-information: #ffffff;
+  --dsc-color-information-bg: #e5f5f8;
+  --dsc-color-on-informantion-bg: #026273;
+  --dsc-color-information-outlined: #c0e9f0;
+
+  /* Cores — estados */
+  --dsc-color-state-highlight-hover-1: #e5f2fc;
+  --dsc-color-state-highlight-hover-2: #005194;
+  --dsc-color-state-highlight-hover-3: #cce6fc;
+  --dsc-color-state-highlight-pressed-1: #cce6fc;
+  --dsc-color-state-highlight-pressed-2: #1474c3;
+  --dsc-color-state-highlight-pressed-3: #a0d2fc;
+  --dsc-color-state-neutral-hover-1: #e3ebeb;
+  --dsc-color-state-neutral-hover-2: #22292e;
+  --dsc-color-state-neutral-hover-alt: #e3ebeb;
+  --dsc-color-state-neutral-pressed-1: #d0e0e3;
+  --dsc-color-state-neutral-pressed-2: #64747a;
+  --dsc-color-state-neutral-pressed-alt: #d0e0e3;
+  --dsc-color-state-focus-outlined-light-tone: #ffffff;
+  --dsc-color-state-focus-outlined-dark-tone: #000000;
+  --dsc-color-state-disabled-1: #f0f2f2;
+  --dsc-color-state-disabled-2: #ebf1f2;
+  --dsc-color-state-on-disabled-1: #9eb2b8;
+  --dsc-color-state-disabled-outlined-1: #d0e0e3;
+  --dsc-color-state-disabled-outlined-2: #9eb2b8;
+
+  /* Cores — fixas (não variam com o tema) */
+  --dsc-color-fixed-highlight: #005ca9;
+  --dsc-color-fixed-on-highlight: #ffffff;
+  --dsc-color-fixed-accent: #d87b00;
+
+  /* Ícones */
+  --dsc-icon-color-highlight-1: #005194;
+  --dsc-icon-color-success-1: #106622;
+  --dsc-icon-color-warning-1: #7d5e02;
+  --dsc-icon-color-danger-1: #a12828;
+  --dsc-icon-color-information-1: #037387;
+
+  /*
+   * Aliases usados pelas instâncias do arquivo do projeto (marca CAIXA e texto do card de acesso).
+   * [FIGMA: AR CAIXA → Brand Symbol: --dsc-color-bg-highlight-5 / --dsc-color-bg-accent-4;
+   *  Card de acesso: --dsc-color-content-neutral-4]
+   */
+  --dsc-color-bg-highlight-5: #005ca9;
+  --dsc-color-bg-accent-4: #f39200;
+  --dsc-color-content-neutral-4: #404b52;
+
+  /* Espaçamento */
+  --dsc-spacing-none: 0px;
+  --dsc-spacing-quark: 4px;
+  --dsc-spacing-nano: 8px;
+  --dsc-spacing-micro: 12px;
+  --dsc-spacing-tiny: 16px;
+  --dsc-spacing-smaller: 24px;
+  --dsc-spacing-small: 32px;
+  --dsc-spacing-medium: 40px;
+  --dsc-spacing-large: 48px;
+  --dsc-spacing-larger: 56px;
+  --dsc-spacing-big: 64px;
+  --dsc-spacing-bigger: 72px;
+  --dsc-spacing-huge: 80px;
+  --dsc-spacing-giant: 120px;
+  --dsc-spacing-enormous: 160px;
+
+  /* Opacidade */
+  --dsc-opacity-4: 0.04;
+  --dsc-opacity-8: 0.08;
+  --dsc-opacity-12: 0.12;
+  --dsc-opacity-16: 0.16;
+  --dsc-opacity-24: 0.24;
+  --dsc-opacity-32: 0.32;
+  --dsc-opacity-40: 0.4;
+  --dsc-opacity-48: 0.48;
+  --dsc-opacity-56: 0.56;
+  --dsc-opacity-64: 0.64;
+  --dsc-opacity-100: 1;
+
+  /* Bordas */
+  --dsc-border-width-none: 0px;
+  --dsc-border-width-hairline: 0.5px;
+  --dsc-border-width-thin: 1px;
+  --dsc-border-width-thick: 2px;
+  --dsc-border-width-heavy: 4px;
+  --dsc-border-radius-none: 0px;
+  --dsc-border-radius-quark: 2px;
+  --dsc-border-radius-nano: 4px;
+  --dsc-border-radius-small: 8px;
+  --dsc-border-radius-medium: 12px;
+  --dsc-border-radius-large: 16px;
+  --dsc-border-radius-big: 24px;
+  --dsc-border-radius-pill: 1000px;
+
+  /* Tipografia — fundamentos */
+  --dsc-font-family-1: 'CAIXA Std', 'Roboto', Arial, sans-serif;
+  --dsc-font-family-2: 'Roboto', Arial, sans-serif;
+  --dsc-font-weight-400: 400;
+  --dsc-font-weight-500: 500;
+  --dsc-font-weight-600: 600;
+  --dsc-font-weight-700: 700;
+  --dsc-font-size-quark: 12px;
+  --dsc-font-size-nano: 14px;
+  --dsc-font-size-micro: 16px;
+  --dsc-font-size-tiny: 18px;
+  --dsc-font-size-smaller: 20px;
+  --dsc-font-size-small: 24px;
+  --dsc-font-size-medium: 28px;
+  --dsc-font-size-large: 32px;
+  --dsc-font-size-larger: 36px;
+  --dsc-font-size-bigger: 48px;
+  --dsc-font-line-height-16: 16px;
+  --dsc-font-line-height-20: 20px;
+  --dsc-font-line-height-24: 24px;
+  --dsc-font-line-height-28: 28px;
+  --dsc-font-line-height-32: 32px;
+  --dsc-font-line-height-36: 36px;
+  --dsc-font-line-height-40: 40px;
+  --dsc-font-line-height-44: 44px;
+  --dsc-font-line-height-48: 48px;
+  --dsc-font-letter-spacing-standard: 0px;
+  --dsc-font-letter-spacing-airy: 0.1px;
+  --dsc-font-letter-spacing-loose: 0.15px;
+  --dsc-font-letter-spacing-broad: 0.25px;
+  --dsc-font-letter-spacing-extended: 0.5px;
+
+  /* Ícones — tamanhos e traços */
+  --dsc-icon-size-quark: 12px;
+  --dsc-icon-size-nano: 16px;
+  --dsc-icon-size-small: 20px;
+  --dsc-icon-size-medium: 24px;
+  --dsc-icon-size-large: 32px;
+  --dsc-icon-size-big: 40px;
+  --dsc-icon-size-huge: 48px;
+
+  /* Sombras — [FIGMA: Super DSC | Web → Shadows | Elevations] */
+  --dsc-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  --dsc-elevation-2: 0px 14px 28px rgba(0, 0, 0, 0.1);
+
+  /* Blur */
+  --dsc-blur-clear: 10px;
+  --dsc-blur-light: 20px;
+  --dsc-blur-medium: 40px;
+
+  /* Componentes — [FIGMA: Super DSC | Web → coleção "responsive"] */
+  --dsc-container-width-compact: 720px;
+  --dsc-container-width: 1080px;
+  --dsc-container-width-wide: 1440px;
+  --dsc-sidebar-menu-width: 288px;
+  --dsc-grid-margin: 48px;
+
+  color-scheme: light;
+}
+
+/* Modo Dark — [FIGMA: Super DSC | Web → coleção "dsc", modo Dark] */
+.dsc-theme-dark {
+  --dsc-color-highlight: #33a0ff;
+  --dsc-color-on-highlight: #000000;
+  --dsc-color-highlight-bg: #002b52;
+  --dsc-color-on-highlight-bg: #c2e2ff;
+  --dsc-color-highlight-outlined: #004784;
+  --dsc-color-accent: #ffbd66;
+  --dsc-color-on-accent: #000000;
+  --dsc-color-accent-bg: #522e00;
+  --dsc-color-on-accent-bg: #ffe9cc;
+  --dsc-color-accent-outlined: #7a4500;
+  --dsc-color-decorative: #21caaf;
+  --dsc-color-on-decorative: #000000;
+  --dsc-color-decorative-bg: #09342e;
+  --dsc-color-on-decorative-bg: #cbf6f0;
+  --dsc-color-decorative-outlined: #0b473d;
+  --dsc-color-neutral-bg-1: #000000;
+  --dsc-color-neutral-bg-2: #282f34;
+  --dsc-color-neutral-bg-3: #4b5863;
+  --dsc-color-neutral-bg-4: #607280;
+  --dsc-color-neutral-bg-alt: #4b5863;
+  --dsc-color-on-neutral-1: #f9fafb;
+  --dsc-color-on-neutral-2: #cad2d8;
+  --dsc-color-on-neutral-3: #b9c3cb;
+  --dsc-color-neutral-bg-inv: #f9fafb;
+  --dsc-color-on-neutral-inv: #000000;
+  --dsc-color-outlined-1: #607280;
+  --dsc-color-outlined-2: #b9c3cb;
+  --dsc-color-background: #1e2429;
+  --dsc-color-success: #50be67;
+  --dsc-color-on-success: #000000;
+  --dsc-color-success-bg: #083512;
+  --dsc-color-on-success-bg: #c1e8c9;
+  --dsc-color-success-outlined: #0c501a;
+  --dsc-color-warning: #fcbe05;
+  --dsc-color-on-warning: #000000;
+  --dsc-color-warning-bg: #4c3a02;
+  --dsc-color-on-warning-bg: #feecb7;
+  --dsc-color-warning-outlined: #755902;
+  --dsc-color-danger: #e47272;
+  --dsc-color-on-danger: #000000;
+  --dsc-color-danger-bg: #511515;
+  --dsc-color-on-danger-bg: #f5cdcd;
+  --dsc-color-danger-outlined: #661a1a;
+  --dsc-color-information: #6acbdc;
+  --dsc-color-on-information: #000000;
+  --dsc-color-information-bg: #014450;
+  --dsc-color-on-informantion-bg: #d5f1f6;
+  --dsc-color-information-outlined: #025564;
+  --dsc-color-state-highlight-hover-1: #002b52;
+  --dsc-color-state-highlight-hover-2: #8fcbff;
+  --dsc-color-state-highlight-hover-3: #004784;
+  --dsc-color-state-highlight-pressed-1: #004784;
+  --dsc-color-state-highlight-pressed-2: #0078e0;
+  --dsc-color-state-highlight-pressed-3: #005ca9;
+  --dsc-color-state-neutral-hover-1: #282f34;
+  --dsc-color-state-neutral-hover-2: #f9fafb;
+  --dsc-color-state-neutral-hover-alt: #607280;
+  --dsc-color-state-neutral-pressed-1: #4b5863;
+  --dsc-color-state-neutral-pressed-2: #b9c3cb;
+  --dsc-color-state-neutral-pressed-alt: #3d4851;
+  --dsc-color-state-focus-outlined-light-tone: #000000;
+  --dsc-color-state-focus-outlined-dark-tone: #ffffff;
+  --dsc-color-state-disabled-1: #282f34;
+  --dsc-color-state-disabled-2: #3d4851;
+  --dsc-color-state-on-disabled-1: #95a4b1;
+  --dsc-color-state-disabled-outlined-1: #607280;
+  --dsc-color-state-disabled-outlined-2: #95a4b1;
+  --dsc-icon-color-highlight-1: #8fcbff;
+  --dsc-icon-color-success-1: #9bdaa9;
+  --dsc-icon-color-warning-1: #fdd150;
+  --dsc-icon-color-danger-1: #f0afaf;
+  --dsc-icon-color-information-1: #b6e4ec;
+  --dsc-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  --dsc-elevation-2: 0px 14px 28px rgba(0, 0, 0, 0.3);
+
+  color-scheme: dark;
+}

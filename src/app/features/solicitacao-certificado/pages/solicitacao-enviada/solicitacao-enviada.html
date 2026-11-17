@@ -1,0 +1,38 @@
+<dsc-progress label="Concluído" [value]="100" />
+
+@if (solicitacao(); as s) {
+  <div class="pagina__feedback">
+    <dsc-state-message illustration="success" label="Solicitação enviada">
+      <p>
+        Solicitação de certificado em nuvem enviada. Acompanhe o andamento em “Acompanhar solicitações”
+      </p>
+      <p><strong>Referência: {{ s.referencia }}.</strong></p>
+    </dsc-state-message>
+
+    <dsc-card class="proximo-passo">
+      <dsc-card-header icon="mail" [separator]="true">
+        <h2 class="proximo-passo__titulo">Próximo passo: verifique seu e-mail</h2>
+      </dsc-card-header>
+      <dsc-card-body>
+        <dsc-label-value-pair
+          label="Abra a mensagem enviada pelo SERPRO"
+          [value]="'Acesse ' + s.emailValidacao + ' para iniciar a validação da sua identidade.'"
+        />
+        <dsc-label-value-pair
+          label="Acompanhe também sua solicitação"
+          variant="emphasized"
+          value="Use o botão “Acompanhar solicitações” abaixo para consultar o andamento e as próximas orientações."
+        />
+        <dsc-label-value-pair
+          label="Não encontrou a mensagem?"
+          value="Verifique também as pastas de spam e lixo eletrônico."
+        />
+      </dsc-card-body>
+    </dsc-card>
+  </div>
+}
+
+<div class="pagina__acoes">
+  <a dscButton appearance="outline" routerLink="/solicitar">Voltar ao início</a>
+  <a dscButton appearance="plain" routerLink="/acompanhar-solicitacoes">Acompanhar solicitações</a>
+</div>

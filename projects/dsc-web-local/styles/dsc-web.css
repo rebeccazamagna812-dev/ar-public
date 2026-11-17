@@ -1,0 +1,7 @@
+/*
+ * Ponto de entrada global da cópia local do Super DSC | Web.
+ * Na troca pela biblioteca oficial, substitua este arquivo em angular.json → "styles"
+ * pelo CSS global distribuído no pacote do DSC.
+ */
+@import './tokens.css';
+@import './typography.css';

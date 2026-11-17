@@ -1,0 +1,138 @@
+/*
+ * Super DSC | Web — estilos tipográficos (CÓPIA LOCAL)
+ * Origem: [FIGMA: Super DSC | Web → estilos de texto "typography/*"]
+ * Nome da classe = nome do estilo no Figma com "/" trocado por "-".
+ */
+
+.dsc-typography-display-standard,
+.dsc-typography-display-standard-semibold {
+  font-family: var(--dsc-font-family-1);
+  font-size: var(--dsc-font-size-larger);
+  line-height: var(--dsc-font-line-height-44);
+  letter-spacing: var(--dsc-font-letter-spacing-standard);
+  font-weight: var(--dsc-font-weight-400);
+}
+.dsc-typography-display-standard-semibold {
+  font-weight: var(--dsc-font-weight-600);
+}
+
+.dsc-typography-title-large,
+.dsc-typography-title-large-semibold {
+  font-family: var(--dsc-font-family-1);
+  font-size: var(--dsc-font-size-medium);
+  line-height: var(--dsc-font-line-height-36);
+  letter-spacing: var(--dsc-font-letter-spacing-standard);
+  font-weight: var(--dsc-font-weight-400);
+}
+.dsc-typography-title-large-semibold {
+  font-weight: var(--dsc-font-weight-600);
+}
+
+.dsc-typography-title-standard,
+.dsc-typography-title-standard-semibold {
+  font-family: var(--dsc-font-family-1);
+  font-size: var(--dsc-font-size-small);
+  line-height: var(--dsc-font-line-height-32);
+  letter-spacing: var(--dsc-font-letter-spacing-standard);
+  font-weight: var(--dsc-font-weight-400);
+}
+.dsc-typography-title-standard-semibold {
+  font-weight: var(--dsc-font-weight-600);
+}
+
+.dsc-typography-title-small,
+.dsc-typography-title-small-semibold {
+  font-family: var(--dsc-font-family-1);
+  font-size: var(--dsc-font-size-smaller);
+  line-height: var(--dsc-font-line-height-28);
+  letter-spacing: var(--dsc-font-letter-spacing-standard);
+  font-weight: var(--dsc-font-weight-400);
+}
+.dsc-typography-title-small-semibold {
+  font-weight: var(--dsc-font-weight-600);
+}
+
+.dsc-typography-body-large,
+.dsc-typography-body-large-semibold {
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-tiny);
+  line-height: var(--dsc-font-line-height-28);
+  letter-spacing: var(--dsc-font-letter-spacing-extended);
+  font-weight: var(--dsc-font-weight-400);
+}
+.dsc-typography-body-large-semibold {
+  font-weight: var(--dsc-font-weight-600);
+}
+
+.dsc-typography-body-standard,
+.dsc-typography-body-standard-semibold {
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-micro);
+  line-height: var(--dsc-font-line-height-24);
+  letter-spacing: var(--dsc-font-letter-spacing-extended);
+  font-weight: var(--dsc-font-weight-400);
+}
+.dsc-typography-body-standard-semibold {
+  font-weight: var(--dsc-font-weight-600);
+}
+
+.dsc-typography-body-small,
+.dsc-typography-body-small-semibold {
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-nano);
+  line-height: var(--dsc-font-line-height-20);
+  letter-spacing: var(--dsc-font-letter-spacing-broad);
+  font-weight: var(--dsc-font-weight-400);
+}
+.dsc-typography-body-small-semibold {
+  font-weight: var(--dsc-font-weight-600);
+}
+
+.dsc-typography-label-standard,
+.dsc-typography-label-standard-bold {
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-micro);
+  line-height: var(--dsc-font-line-height-24);
+  letter-spacing: var(--dsc-font-letter-spacing-loose);
+  font-weight: var(--dsc-font-weight-500);
+}
+.dsc-typography-label-standard-bold {
+  font-weight: var(--dsc-font-weight-700);
+}
+
+.dsc-typography-label-small,
+.dsc-typography-label-small-bold {
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-nano);
+  line-height: var(--dsc-font-line-height-20);
+  letter-spacing: var(--dsc-font-letter-spacing-airy);
+  font-weight: var(--dsc-font-weight-500);
+}
+.dsc-typography-label-small-bold {
+  font-weight: var(--dsc-font-weight-700);
+}
+
+.dsc-typography-label-tiny,
+.dsc-typography-label-tiny-bold {
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-quark);
+  line-height: var(--dsc-font-line-height-16);
+  letter-spacing: var(--dsc-font-letter-spacing-extended);
+  font-weight: var(--dsc-font-weight-500);
+}
+.dsc-typography-label-tiny-bold {
+  font-weight: var(--dsc-font-weight-700);
+}
+
+/* Utilitário de acessibilidade: conteúdo só para leitores de tela */
+.dsc-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

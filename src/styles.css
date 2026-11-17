@@ -1,0 +1,51 @@
+/*
+ * Estilos globais mínimos da aplicação.
+ * Os tokens e a tipografia vêm de projects/dsc-web-local/styles/dsc-web.css (cópia local do Super DSC).
+ * Nenhum valor de cor, fonte ou espaçamento fixo: só tokens --dsc-*.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--dsc-color-background);
+  color: var(--dsc-color-on-neutral-1);
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-micro);
+  line-height: var(--dsc-font-line-height-24);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--dsc-color-highlight);
+}
+
+:focus-visible {
+  outline: var(--dsc-border-width-thick) solid var(--dsc-color-state-focus-outlined-dark-tone);
+  outline-offset: var(--dsc-border-width-thick);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

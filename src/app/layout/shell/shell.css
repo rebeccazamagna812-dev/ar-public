@@ -1,0 +1,99 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--dsc-color-background);
+}
+
+/* Link "pular para o conteúdo": visível só com foco de teclado. [PADRÃO DE MERCADO — acessibilidade] */
+.shell__pular {
+  position: absolute;
+  top: var(--dsc-spacing-nano);
+  left: var(--dsc-spacing-nano);
+  z-index: 30;
+  padding: var(--dsc-spacing-nano) var(--dsc-spacing-tiny);
+  border-radius: var(--dsc-border-radius-pill);
+  background: var(--dsc-color-highlight);
+  color: var(--dsc-color-on-highlight);
+  transform: translateY(-200%);
+}
+.shell__pular:focus {
+  transform: none;
+}
+
+.shell__header {
+  position: relative;
+  z-index: 20;
+}
+
+.shell__conta {
+  position: relative;
+}
+
+/* [FIGMA: OV — Conta do usuário → Menu da conta, alinhado à direita abaixo do Account Select] */
+.shell__menu-conta {
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+.shell__texto-mobile {
+  display: none;
+}
+
+/* Menu lateral em overlay abaixo do Header [FIGMA: OV — Menu lateral] */
+.shell__overlay {
+  position: fixed;
+  inset: var(--dsc-spacing-big) 0 0; /* altura do Header (64 px) */
+  z-index: 10;
+}
+.shell__menu {
+  position: fixed;
+  top: var(--dsc-spacing-big);
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+  box-shadow: var(--dsc-elevation-2);
+}
+
+/*
+ * Área de conteúdo [FIGMA: frame "Conteúdo" — 1248 px, margens laterais de 96 px, 8 px abaixo do Header,
+ * fundo neutralBg1, raio medium, padding 24]
+ */
+.shell__main {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: var(--dsc-spacing-nano) var(--dsc-spacing-small);
+  outline: none;
+}
+.shell__conteudo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: calc(var(--dsc-container-width-wide) - 2 * var(--dsc-spacing-big) - 2 * var(--dsc-spacing-small));
+  padding: var(--dsc-spacing-smaller);
+  border-radius: var(--dsc-border-radius-medium);
+  background: var(--dsc-color-neutral-bg-1);
+}
+
+/* Breakpoints do DSC [FIGMA: Super DSC | Web → coleção responsive]: medium < 1024px, small < 768px */
+@media (max-width: 1023px) {
+  .shell__main {
+    padding-inline: var(--dsc-spacing-smaller);
+  }
+}
+@media (max-width: 767px) {
+  .shell__main {
+    padding-inline: var(--dsc-spacing-nano);
+  }
+  .shell__conteudo {
+    padding: var(--dsc-spacing-tiny);
+  }
+  .shell__texto-desktop {
+    display: none;
+  }
+  .shell__texto-mobile {
+    display: inline;
+  }
+}

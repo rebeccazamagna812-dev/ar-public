@@ -1,0 +1,82 @@
+/*
+ * Estrutura comum das páginas dentro da área de conteúdo.
+ * [FIGMA: frame "Conteúdo" — auto layout vertical, gap 20, ações fixadas no rodapé por um Spacer]
+ * Importado por cada página via `styleUrls`.
+ */
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: calc(var(--dsc-spacing-tiny) + var(--dsc-spacing-quark));
+  min-width: 0;
+}
+
+.pagina__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dsc-spacing-smaller);
+  min-height: 44px;
+}
+
+.pagina__titulo {
+  color: var(--dsc-color-on-neutral-1);
+  font-family: var(--dsc-font-family-1);
+  font-size: var(--dsc-font-size-medium);
+  line-height: var(--dsc-font-line-height-36);
+  font-weight: var(--dsc-font-weight-600);
+}
+
+.pagina__subtitulo {
+  color: var(--dsc-color-on-neutral-2);
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-tiny);
+  line-height: var(--dsc-font-line-height-28);
+  letter-spacing: var(--dsc-font-letter-spacing-extended);
+}
+
+/* Feedback centralizado verticalmente [FIGMA: "Feedback — centralizado verticalmente"] */
+.pagina__feedback {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--dsc-spacing-tiny) + var(--dsc-spacing-quark));
+}
+
+/* Caixa neutra de orientações [FIGMA: 01.E1–E4 → "Orientações"] */
+.pagina__orientacoes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dsc-spacing-micro);
+  margin: 0;
+  padding: calc(var(--dsc-spacing-tiny) + var(--dsc-spacing-quark)) var(--dsc-spacing-smaller);
+  border: var(--dsc-border-width-thin) solid var(--dsc-color-outlined-1);
+  border-radius: var(--dsc-border-radius-medium);
+  background: var(--dsc-color-neutral-bg-2);
+  color: var(--dsc-color-on-neutral-1);
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-micro);
+  line-height: var(--dsc-font-line-height-20);
+  letter-spacing: var(--dsc-font-letter-spacing-extended);
+  list-style: none;
+}
+
+/* Ações no rodapé da área de conteúdo [FIGMA: "Ações" — gap nano] */
+.pagina__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dsc-spacing-nano);
+  margin-top: auto;
+  padding-top: var(--dsc-spacing-smaller);
+}
+
+@media (max-width: 767px) {
+  .pagina__cabecalho {
+    flex-wrap: wrap;
+  }
+  .pagina__titulo {
+    font-size: var(--dsc-font-size-small);
+    line-height: var(--dsc-font-line-height-32);
+  }
+}

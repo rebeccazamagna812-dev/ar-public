@@ -1,0 +1,74 @@
+<a class="shell__pular" href="#conteudo">Pular para o conteúdo</a>
+
+<dsc-header
+  class="shell__header"
+  [acronym]="sistema.sigla"
+  [systemName]="sistema.nome"
+  [menuExpanded]="menuAberto()"
+  menuControls="menu-principal"
+  (menuClick)="alternarMenu()"
+>
+  <a dscHeaderFeatures dscButton appearance="chromeless" iconLeft="help-circle" routerLink="/duvidas-frequentes">
+    <span class="shell__texto-desktop">Dúvidas frequentes</span>
+    <span class="dsc-visually-hidden shell__texto-mobile">Dúvidas frequentes</span>
+  </a>
+
+  @if (usuario(); as u) {
+    <div dscHeaderAccount class="shell__conta">
+      <button
+        #botaoConta
+        dscAccountSelect
+        type="button"
+        [name]="u.nome"
+        [label1]="u.perfil"
+        [label2]="u.matricula"
+        aria-haspopup="menu"
+        aria-controls="menu-conta"
+        [attr.aria-expanded]="contaAberta()"
+        (click)="alternarConta()"
+      ></button>
+      @if (contaAberta()) {
+        <dsc-dropdown id="menu-conta" class="shell__menu-conta" aria-label="Conta do usuário">
+          <button dscDropdownItem type="button" icon="log-out" (click)="sair()">Sair</button>
+        </dsc-dropdown>
+      }
+    </div>
+  }
+</dsc-header>
+
+@if (menuAberto()) {
+  <!-- Fundo clicável para fechar com o mouse; pelo teclado, o menu fecha com Esc. -->
+  <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+  <div class="shell__overlay" (click)="fecharPaineis()" aria-hidden="true"></div>
+  <dsc-sidebar-menu #menu id="menu-principal" class="shell__menu">
+    @for (item of itens; track item.rota) {
+      <li>
+        <a
+          dscSidebarMenuItem
+          [icon]="item.icone"
+          [routerLink]="item.rota"
+          routerLinkActive
+          #rla="routerLinkActive"
+          [routerLinkActiveOptions]="{ exact: item.rota === '/' }"
+          [selected]="rla.isActive"
+        >
+          {{ item.rotuloMenu }}
+        </a>
+      </li>
+    }
+  </dsc-sidebar-menu>
+}
+
+<main #conteudo id="conteudo" class="shell__main" tabindex="-1">
+  <div class="shell__conteudo">
+    <router-outlet />
+  </div>
+</main>
+
+<dsc-footer
+  [cgc]="sistema.cgc"
+  [sigla]="sistema.siglaUnidade"
+  [supportingText]="sistema.textoApoio"
+  [version]="sistema.versao"
+  [copyright]="copyright"
+/>

@@ -1,0 +1,29 @@
+/* [FIGMA: 01.01A → "Modalidades" — 2 colunas, gap 24] */
+.modalidades {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--dsc-spacing-smaller);
+}
+
+/* [FIGMA: "Conteúdo da escolha" — padding 4, gap 10 dentro do Card Body (padding 16)] */
+.modalidade {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--dsc-spacing-nano) + var(--dsc-border-width-thick));
+  padding: calc(var(--dsc-spacing-tiny) + var(--dsc-spacing-quark));
+  padding-bottom: var(--dsc-spacing-small);
+}
+
+.modalidade__descricao {
+  color: var(--dsc-color-on-neutral-2);
+  font-family: var(--dsc-font-family-2);
+  font-size: var(--dsc-font-size-nano);
+  line-height: var(--dsc-font-line-height-20);
+  letter-spacing: var(--dsc-font-letter-spacing-broad);
+}
+
+@media (max-width: 767px) {
+  .modalidades {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

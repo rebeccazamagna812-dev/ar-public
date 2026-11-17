@@ -1,0 +1,25 @@
+@let c = conteudo();
+
+<dsc-progress [label]="c.etapa.rotulo" [value]="c.etapa.valor" />
+
+<div class="pagina__feedback">
+  <dsc-state-message [illustration]="c.ilustracao" [label]="c.titulo">{{ c.texto }}</dsc-state-message>
+
+  <ul class="pagina__orientacoes">
+    @for (linha of c.orientacoes; track linha) {
+      <li>{{ linha }}</li>
+    }
+  </ul>
+</div>
+
+<div class="pagina__acoes">
+  <a dscButton appearance="outline" routerLink="/solicitar">Voltar</a>
+  <a
+    dscButton
+    appearance="plain"
+    routerLink="/solicitar"
+    [queryParams]="c.acaoPrincipal.modalidadeNuvem ? { modalidade: 'nuvem' } : {}"
+  >
+    {{ c.acaoPrincipal.rotulo }}
+  </a>
+</div>

@@ -1,0 +1,17 @@
+/* [FIGMA: 01.02 → "Dados cadastrais" — 2 colunas com gap 24, linhas com gap 16] */
+.dados {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--dsc-spacing-tiny) var(--dsc-spacing-smaller);
+  min-height: calc(3 * 48px + 2 * var(--dsc-spacing-tiny));
+}
+
+.dados__erro {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 767px) {
+  .dados {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

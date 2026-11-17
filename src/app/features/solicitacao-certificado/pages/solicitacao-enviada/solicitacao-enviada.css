@@ -1,0 +1,7 @@
+.proximo-passo__titulo {
+  font: inherit;
+}
+
+.pagina__feedback strong {
+  font-weight: var(--dsc-font-weight-600);
+}
