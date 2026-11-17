@@ -9,7 +9,7 @@ export interface ConteudoInterrupcao {
   readonly titulo: string;
   readonly texto: string;
   readonly orientacoes: readonly string[];
-  readonly acaoPrincipal: { readonly rotulo: string; readonly modalidadeNuvem: boolean };
+  readonly acaoPrincipal: { readonly rotulo: string; readonly tentarNovamente: boolean };
 }
 
 export const INTERRUPCOES: Readonly<Record<MotivoInterrupcao, ConteudoInterrupcao>> = {
@@ -23,7 +23,7 @@ export const INTERRUPCOES: Readonly<Record<MotivoInterrupcao, ConteudoInterrupca
       'A opção é exibida somente para empregados elegíveis.',
       'Se precisar de certificado digital, escolha uma modalidade disponível para o seu perfil.',
     ],
-    acaoPrincipal: { rotulo: 'Voltar', modalidadeNuvem: false },
+    acaoPrincipal: { rotulo: 'Voltar', tentarNovamente: false },
   },
   /** [FIGMA: 01.E2 — Certificado em nuvem ativo] */
   'certificado-ativo': {
@@ -35,7 +35,7 @@ export const INTERRUPCOES: Readonly<Record<MotivoInterrupcao, ConteudoInterrupca
       'Nenhuma nova solicitação será enviada ao SERPRO.',
       'Nenhum registro de nova solicitação será persistido no SIARX.',
     ],
-    acaoPrincipal: { rotulo: 'Entendi', modalidadeNuvem: false },
+    acaoPrincipal: { rotulo: 'Entendi', tentarNovamente: false },
   },
   /** [FIGMA: 01.E3 — Divergência cadastral] */
   'divergencia-cadastral': {
@@ -48,7 +48,7 @@ export const INTERRUPCOES: Readonly<Record<MotivoInterrupcao, ConteudoInterrupca
       'A solicitação não foi enviada ao SERPRO.',
       'Depois da regularização cadastral, inicie uma nova tentativa.',
     ],
-    acaoPrincipal: { rotulo: 'Voltar ao início', modalidadeNuvem: false },
+    acaoPrincipal: { rotulo: 'Voltar ao início', tentarNovamente: false },
   },
   /** [FIGMA: 01.E4 — SERPRO indisponível] */
   'serpro-indisponivel': {
@@ -60,7 +60,7 @@ export const INTERRUPCOES: Readonly<Record<MotivoInterrupcao, ConteudoInterrupca
       'A solicitação não foi registrada no SIARX.',
       'Você poderá tentar novamente quando o serviço estiver disponível.',
     ],
-    acaoPrincipal: { rotulo: 'Tentar novamente', modalidadeNuvem: true },
+    acaoPrincipal: { rotulo: 'Tentar novamente', tentarNovamente: true },
   },
 };
 
