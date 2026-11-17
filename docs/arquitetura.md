@@ -19,30 +19,39 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
 - **Decisão:** `tokens.css` com os tokens da coleção `dsc` (modos Light e Dark), exceto os de gráfico e a escala de cinza, com os nomes exatos do Code Syntax WEB (`--dsc-color-highlight`, `--dsc-spacing-tiny`…). Estilos de texto viram classes `dsc-typography-*`.
 - **Origem:** `[FIGMA: Super DSC | Web → coleção "dsc", estilos "typography/*", "Shadows | Elevations"]`.
 
-## ADR-04 — Organização por domínio
-- **Decisão:** `core/` (singletons, contratos, guards globais, erros), `layout/` (shell), `shared/` (ui, pipes, estilos de página), `features/<funcionalidade>/` com rotas próprias e lazy loading.
+## ADR-04 — Organização por camadas e domínio
+- **Decisão:**
+  - `core/`: infraestrutura transversal e composição da aplicação (auth, http, erros, navegação, providers);
+  - `domain/<assunto>/`: modelos, contratos de API e serviços de regra usados por mais de uma feature;
+  - `mocks/`: implementações simuladas dos contratos;
+  - `layout/` (shell), `shared/` (ui, pipes, estilos de página);
+  - `features/<funcionalidade>/`: rotas próprias, lazy loading, estado e páginas. O que só uma feature usa fica nela.
 - **Origem:** `[PADRÃO DE MERCADO]` + diretriz do projeto.
 
-## ADR-05 — Estado com signals em serviço de feature
-- **Decisão:** `SolicitacaoNuvemStore` (signals) guarda a modalidade, os dados e a solicitação registrada durante a jornada. Nada é persistido no navegador.
-- **Descartadas:** NgRx (desproporcional ao escopo atual).
+## ADR-05 — Estado com signals + fachada da jornada, no escopo da feature
+- **Decisão:**
+  - `SolicitacaoNuvemStore` (signals) guarda os dados e a solicitação registrada durante a jornada. Nada é persistido no navegador.
+  - `SolicitacaoNuvemJornada` (fachada) concentra as regras e decide a próxima tela: entrada na etapa 2, carga dos dados e envio. Telas e guards só chamam a fachada; só ela escreve no store.
+  - Os dois são fornecidos em `providers` da rota da funcionalidade, não em `root`.
+- **Por quê:** a regra "sucesso → 01.04, divergência → 01.E3, falha → 01.E4" fica num lugar só e é testada sem renderizar componentes.
+- **Descartadas:** NgRx (desproporcional ao escopo atual); lógica dentro das páginas e dos guards (versão anterior).
 - **Origem:** `[PADRÃO DE MERCADO]`; `[DOC: RNF01]` para não guardar dado sensível.
 
 ## ADR-06 — API e autenticação por contrato (classe abstrata) + implementação simulada
 - **Contexto:** a documentação não define autenticação, endpoints nem formato de erro.
-- **Decisão:** as telas dependem de `SolicitacaoCertificadoApi` e `AutenticacaoService`. Hoje são registradas as implementações *mock*, com cenários escolhidos por `?cenario=`. A implementação HTTP entra só em `app.config.ts`.
+- **Decisão:** as telas dependem de `SolicitacaoCertificadoApi` e `AutenticacaoService`. Hoje são registradas as implementações *mock* (`src/app/mocks/`), com cenários escolhidos por `?cenario=`. A implementação HTTP entra só em `core/providers/siarx.providers.ts` (`provideImplementacoes`).
 - **Origem:** `[PENDENTE]` (Fase 1, itens 2–4); `[PADRÃO DE MERCADO]` para o padrão de troca.
 
 ## ADR-07 — Elegibilidade carregada no bootstrap
-- **Decisão:** `provideAppInitializer` inicia a sessão e carrega a elegibilidade antes da primeira tela. A modalidade inelegível **não é exibida**.
+- **Decisão:** `provideSessaoInicial()` (`provideAppInitializer`) inicia a sessão e carrega a elegibilidade antes da primeira tela. A modalidade inelegível **não é exibida**.
 - **Origem:** `[DOC: HU03a RN04/RF04, HU02 CA02, HU03c CA02]`.
 
 ## ADR-08 — Guards da jornada
-- **Decisão:** `jornadaNuvemGuard` na etapa 2:
+- **Decisão:** `jornadaNuvemGuard` na etapa 2 delega a `SolicitacaoNuvemJornada.verificarEntradaNuvem()`:
   - sem elegibilidade → 01.E1;
   - certificado em nuvem ativo → 01.E2.
 
-  O resultado do envio decide entre 01.04, 01.E3 e 01.E4. `solicitacaoRegistradaGuard` protege 01.04.
+  Guards não alteram estado. O resultado do envio (`SolicitacaoNuvemJornada.confirmar()`) decide entre 01.04, 01.E3 e 01.E4. `solicitacaoRegistradaGuard` protege 01.04.
 - **Origem:** `[FIGMA: 01.E1–01.E4]` `[DOC: HU04]`.
 
 ## ADR-09 — Fluxo em 2 telas + envio (sem a 01.03)
@@ -72,3 +81,9 @@ Formato curto: contexto · decisão · alternativas descartadas · origem.
   - foco visível com o token de foco do DSC;
   - regras de acessibilidade do angular-eslint.
 - **Origem:** `[DOC: RNF04]` (norma e nível `[PENDENTE]`); `[PADRÃO DE MERCADO]`.
+
+## ADR-13 — Fronteiras entre camadas verificadas pelo lint
+- **Contexto:** sem verificação, features passam a importar umas das outras e `shared/` passa a depender do negócio, o que acopla o código aos poucos.
+- **Decisão:** regras `no-restricted-imports` por pasta em `eslint.config.js` (tabela no README → "Fronteiras entre camadas"). Telas genéricas reutilizadas por várias rotas, como o placeholder, ficam em `shared/paginas/`.
+- **Descartadas:** `eslint-plugin-boundaries` (dependência extra para um conjunto pequeno de regras); só convenção escrita (não impede regressão).
+- **Origem:** `[PADRÃO DE MERCADO]`.

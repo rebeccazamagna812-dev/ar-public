@@ -15,14 +15,14 @@
 | Menu da conta ("Sair") | `shell.html` | `[FIGMA: OV — Conta do usuário]` |
 | Área de conteúdo (1248 px, padding 24, gap 20) | `shell.css`, `shared/styles/pagina.css` | `[FIGMA: frame Conteúdo]` |
 | Footer | `shell.html`, `environments/*` | `[FIGMA: [dsc] Footer]` |
-| Home: 9 cards e 2 alertas | `features/home/*`, `navegacao.ts` | `[FIGMA: 00.01 — Home]` |
+| Home: 9 cards (ordem em `home.ordem`) e 2 alertas | `features/home/*`, `navegacao.ts` | `[FIGMA: 00.01 — Home]` |
 | Card de acesso (local) | `shared/ui/card-acesso/card-acesso.ts` | `[FIGMA: AR-CAIXA / Card de acesso]` |
 | Etapa 1: escolher modalidade, Continuar desabilitado sem seleção | `pages/escolher-modalidade/*` | `[FIGMA: 01.01, 01.01A]` |
 | Ocultar modalidade inelegível | `escolher-modalidade.html` | `[DOC: HU02 CA02, HU03a CA02, HU03c CA02]` |
-| Elegibilidade no login | `app.config.ts`, `core/elegibilidade/*` | `[DOC: HU03a RN04/RF04]` |
+| Elegibilidade no login | `core/providers/siarx.providers.ts`, `domain/certificado/elegibilidade.service.ts` | `[DOC: HU03a RN04/RF04]` |
 | Etapa 2: dados IntegraMais somente leitura | `pages/conferir-dados/*` | `[FIGMA: 01.02]` `[DOC: HU05]` |
 | CPF mascarado | `shared/pipes/mascara-cpf.pipe.ts` | `[FIGMA: 01.02]` `[DOC: RNF01]` |
-| Envio ao SERPRO; registro só após retorno | `core/api/*`, `conferir-dados.ts` | `[FIGMA: 01.03 texto, 01.E4]` |
+| Envio ao SERPRO; registro só após retorno | `domain/certificado/*`, `mocks/*`, `solicitacao-nuvem.jornada.ts` | `[FIGMA: 01.03 texto, 01.E4]` |
 | Solicitação enviada + próximo passo (e-mail) | `pages/solicitacao-enviada/*` | `[FIGMA: 01.04]` |
 | Não elegível | `pages/interrupcao/interrupcoes.ts`, guard | `[FIGMA: 01.E1]` |
 | Certificado em nuvem ativo | `interrupcoes.ts`, guard | `[FIGMA: 01.E2]` `[DOC: HU04]` |
@@ -33,7 +33,7 @@
 | Sem dados sensíveis em log | `core/erros/*`, `core/http/*` | `[DOC: RNF01]` |
 | Locale pt-BR | `app.config.ts` | diretriz do projeto |
 | Título da aba, foco na navegação, skip link | `core/navegacao/siarx-title-strategy.ts`, `shell.*` | `[PADRÃO DE MERCADO]` |
-| Placeholders das demais funcionalidades | `app.routes.ts`, `features/placeholder` | `[FIGMA: seções 00.02, 04–10]` |
+| Placeholders das demais funcionalidades | `navegacao.ts` (`emConstrucao`, `PAGINAS_FORA_DO_MENU`) → `app.routes.ts`, `shared/paginas/placeholder` | `[FIGMA: seções 00.02, 04–10]` |
 | Página não encontrada | `features/nao-encontrado` | `[PADRÃO DE MERCADO]` |
 | Erro ao carregar dados / elegibilidade | `conferir-dados.html`, `escolher-modalidade.html` | `[PADRÃO DE MERCADO]` (sem tela no Figma) |
 

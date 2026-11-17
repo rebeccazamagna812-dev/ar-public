@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { AutenticacaoService, UsuarioSessao } from './autenticacao.service';
+import { AutenticacaoService, UsuarioSessao } from '@core/auth/autenticacao.service';
 
 /** Sessão SIMULADA com o usuário de exemplo do Figma. Não use em produção. */
 @Injectable()

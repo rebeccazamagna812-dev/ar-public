@@ -36,7 +36,8 @@
             ],
             "styles": [
               "projects/dsc-web-local/styles/dsc-web.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/shared/styles/pagina.css"
             ]
           },
           "configurations": {
@@ -97,7 +98,8 @@
             ],
             "styles": [
               "projects/dsc-web-local/styles/dsc-web.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/shared/styles/pagina.css"
             ]
           }
         },

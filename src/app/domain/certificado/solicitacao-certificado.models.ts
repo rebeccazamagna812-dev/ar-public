@@ -45,12 +45,11 @@ export interface SolicitacaoRegistrada {
  * - divergencia-cadastral: divergência entre dados CAIXA e SERPRO [FIGMA: 01.E3]
  * - serpro-indisponivel: SERPRO fora do ar no envio; nada é registrado [FIGMA: 01.E4]
  */
-export type MotivoInterrupcao =
-  | 'nao-elegivel'
-  | 'certificado-ativo'
-  | 'divergencia-cadastral'
-  | 'serpro-indisponivel';
+export type MotivoInterrupcao = 'nao-elegivel' | 'certificado-ativo' | 'divergencia-cadastral' | 'serpro-indisponivel';
 
 export type ResultadoEnvioSolicitacao =
   | { readonly tipo: 'registrada'; readonly solicitacao: SolicitacaoRegistrada }
-  | { readonly tipo: 'interrompida'; readonly motivo: Extract<MotivoInterrupcao, 'divergencia-cadastral' | 'serpro-indisponivel'> };
+  | {
+      readonly tipo: 'interrompida';
+      readonly motivo: Extract<MotivoInterrupcao, 'divergencia-cadastral' | 'serpro-indisponivel'>;
+    };

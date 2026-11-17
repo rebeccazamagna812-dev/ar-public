@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject, input, linkedSignal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DscButton, DscCard, DscCardAlert, DscProgress, DscRadio } from '@dsc/web';
-import { ElegibilidadeService } from '@core/elegibilidade/elegibilidade.service';
-import { ModalidadeCertificado } from '@core/models/solicitacao-certificado.models';
-import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
+import { ElegibilidadeService } from '@domain/certificado/elegibilidade.service';
+import { ModalidadeCertificado } from '@domain/certificado/solicitacao-certificado.models';
+import { ETAPAS_JORNADA } from '../../solicitacao-certificado.etapas';
+import { ROTAS_SOLICITACAO } from '../../solicitacao-certificado.paths';
+import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
 
 /**
  * Etapa 1 de 3 — Escolher modalidade.
@@ -17,17 +19,19 @@ import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
   selector: 'app-escolher-modalidade',
   imports: [RouterLink, DscButton, DscCard, DscCardAlert, DscProgress, DscRadio],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   templateUrl: './escolher-modalidade.html',
-  styleUrls: ['../../../../shared/styles/pagina.css', './escolher-modalidade.css'],
+  styleUrl: './escolher-modalidade.css',
 })
 export class EscolherModalidade implements OnInit {
   private readonly router = inject(Router);
-  private readonly store = inject(SolicitacaoNuvemStore);
+  private readonly jornada = inject(SolicitacaoNuvemJornada);
   private readonly elegibilidade = inject(ElegibilidadeService);
 
   /** Query param `modalidade` (withComponentInputBinding). */
   readonly modalidade = input<string | undefined>(undefined);
 
+  protected readonly etapa = ETAPAS_JORNADA.escolha;
   protected readonly podeNuvem = this.elegibilidade.podeSolicitarNuvem;
   protected readonly podeMidiaFisica = this.elegibilidade.podeSolicitarMidiaFisica;
   protected readonly falhaElegibilidade = this.elegibilidade.falhou;
@@ -50,7 +54,7 @@ export class EscolherModalidade implements OnInit {
 
   ngOnInit(): void {
     // Voltar a esta etapa recomeça a jornada.
-    this.store.reiniciar();
+    this.jornada.reiniciar();
   }
 
   protected selecionar(modalidade: string): void {
@@ -68,7 +72,8 @@ export class EscolherModalidade implements OnInit {
     if (!modalidade) {
       return;
     }
-    this.store.selecionarModalidade(modalidade);
-    void this.router.navigateByUrl(modalidade === 'nuvem' ? '/solicitar/nuvem/dados' : '/solicitar/midia-fisica');
+    void this.router.navigateByUrl(
+      modalidade === 'nuvem' ? ROTAS_SOLICITACAO.dadosNuvem : ROTAS_SOLICITACAO.midiaFisica,
+    );
   }
 }

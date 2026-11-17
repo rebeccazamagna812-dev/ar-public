@@ -9,7 +9,9 @@ import {
   DscProgress,
   DscStateMessage,
 } from '@dsc/web';
-import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
+import { ETAPAS_JORNADA } from '../../solicitacao-certificado.etapas';
+import { ROTAS_SOLICITACAO } from '../../solicitacao-certificado.paths';
+import { SolicitacaoNuvemJornada } from '../../state/solicitacao-nuvem.jornada';
 
 /**
  * Solicitação enviada. [FIGMA: 01.04 — Solicitação enviada]
@@ -28,9 +30,12 @@ import { SolicitacaoNuvemStore } from '../../state/solicitacao-nuvem.store';
     DscStateMessage,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   templateUrl: './solicitacao-enviada.html',
-  styleUrls: ['../../../../shared/styles/pagina.css', './solicitacao-enviada.css'],
+  styleUrl: './solicitacao-enviada.css',
 })
 export class SolicitacaoEnviada {
-  protected readonly solicitacao = inject(SolicitacaoNuvemStore).solicitacao;
+  protected readonly etapa = ETAPAS_JORNADA.concluido;
+  protected readonly rotaInicio = ROTAS_SOLICITACAO.inicio;
+  protected readonly solicitacao = inject(SolicitacaoNuvemJornada).solicitacao;
 }

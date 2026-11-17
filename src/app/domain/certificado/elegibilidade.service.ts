@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { SolicitacaoCertificadoApi } from '@core/api/solicitacao-certificado.api';
-import { Elegibilidade } from '@core/models/solicitacao-certificado.models';
+import { SolicitacaoCertificadoApi } from './solicitacao-certificado.api';
+import { Elegibilidade } from './solicitacao-certificado.models';
 
 /**
  * Guarda a elegibilidade do empregado, carregada uma vez após o login.

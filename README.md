@@ -48,21 +48,25 @@ siarx-front/
 │  ├─ styles.css                    estilos globais mínimos (só tokens)
 │  └─ app/
 │     ├─ app.ts · app.config.ts · app.routes.ts
-│     ├─ core/                      singletons: api (contrato + mock), auth, elegibilidade,
-│     │                             erros, http (interceptor), navegação, modelos
+│     ├─ core/                      infraestrutura transversal: auth (contrato), http (interceptor), erros,
+│     │                             navegação (menu/Home/rotas futuras), providers (troca mock ↔ real)
+│     ├─ domain/certificado/        modelos, contrato da API e elegibilidade, usados por mais de uma feature
+│     ├─ mocks/                     API e autenticação simuladas (cenários por ?cenario=)
 │     ├─ layout/shell/              Header + Menu lateral + Conta + Conteúdo + Footer
-│     ├─ shared/                    ui/card-acesso (componente local), pipes, styles/pagina.css
+│     ├─ shared/                    ui/card-acesso (componente local), paginas/placeholder, pipes,
+│     │                             styles/pagina.css (global)
 │     └─ features/
 │        ├─ home/                   00.01 — Home
-│        ├─ solicitacao-certificado/  jornada em nuvem (rotas, guards, store, páginas)
-│        ├─ placeholder/            tela genérica das funcionalidades futuras
+│        ├─ solicitacao-certificado/  jornada em nuvem (rotas, paths, etapas, guards, store + fachada, páginas)
 │        └─ nao-encontrado/
 └─ docs/
    ├─ arquitetura.md                ADRs
+   ├─ jornada-nuvem.md              diagrama de estados da jornada e onde fica cada decisão
+   ├─ nova-funcionalidade.md        roteiro para implementar uma funcionalidade "Em construção"
    └─ rastreabilidade.md            matriz Item | Arquivo | Origem + pendências
 ```
 
-Aliases (`tsconfig.json`): `@core/*`, `@shared/*`, `@layout/*`, `@features/*`, `@env/*`, `@dsc/web`.
+Aliases (`tsconfig.json`): `@core/*`, `@domain/*`, `@mocks/*`, `@shared/*`, `@layout/*`, `@features/*`, `@env/*`, `@dsc/web`.
 
 ---
 
@@ -74,6 +78,38 @@ Aliases (`tsconfig.json`): `@core/*`, `@shared/*`, `@layout/*`, `@features/*`, `
 - Código em inglês onde é convenção do framework. Domínio, comentários e textos em **pt-BR**.
 - Toda decisão relevante tem origem anotada no código: `[FIGMA: …]`, `[DOC: …]`, `[PADRÃO DE MERCADO]` ou `[PENDENTE]`.
 - Nenhuma cor, fonte ou espaçamento fixo: só `var(--dsc-*)`.
+- Toda página roteada declara `host: { class: 'pagina' }` e usa as classes `pagina__*` (`titulo`, `subtitulo`,
+  `cabecalho`, `feedback`, `orientacoes`, `acoes`), definidas em `shared/styles/pagina.css`, que é global.
+
+### Nomes de arquivo
+
+| Tipo | Padrão | Exemplo |
+|---|---|---|
+| Componente / página | `<nome>.ts` (+ `.html`, `.css`), classe sem sufixo | `conferir-dados.ts` → `ConferirDados` |
+| Contrato de API | `<assunto>.api.ts` (classe abstrata) | `solicitacao-certificado.api.ts` |
+| Implementação simulada | `<nome>.mock.ts`, em `src/app/mocks/` | `solicitacao-certificado-api.mock.ts` |
+| Serviço | `<nome>.service.ts` | `elegibilidade.service.ts` |
+| Estado / fachada de feature | `<nome>.store.ts` / `<nome>.jornada.ts` | `solicitacao-nuvem.store.ts` |
+| Guard / interceptor / pipe | `<nome>.guard.ts` / `<nome>.interceptor.ts` / `<nome>.pipe.ts` | `jornada-nuvem.guard.ts` |
+| Rotas, caminhos e etapas de feature | `<feature>.routes.ts` / `<feature>.paths.ts` / `<feature>.etapas.ts` | `solicitacao-certificado.paths.ts` |
+| Teste | ao lado do arquivo, `<arquivo>.spec.ts` | `solicitacao-nuvem.jornada.spec.ts` |
+
+### Idioma
+- Domínio, telas, métodos de negócio, comentários e textos: **pt-BR** (`ConferirDados`, `confirmar()`, `ElegibilidadeService`).
+- Termos técnicos do framework ou de arquitetura ficam em inglês, como sufixo ou nome genérico:
+  `Store`, `Api`, `Guard`, `Service`, `Shell`, `Home`, `routes`, `providers`.
+
+### Fronteiras entre camadas (verificadas pelo `npm run lint`, ADR-13)
+
+| Camada | Pode importar | Não pode importar |
+|---|---|---|
+| `domain/` | só a si mesma | `core`, `features`, `layout`, `shared`, `mocks` |
+| `shared/` | `@dsc/web` | `core`, `domain`, `features`, `layout`, `mocks` |
+| `core/` | `domain`, `mocks` (só em `providers/`) | `features`, `layout`, `shared` |
+| `mocks/` | `core`, `domain` | `features`, `layout`, `shared` |
+| `layout/` | `core`, `shared` | `features`, `mocks` |
+| `features/<x>/` | `core`, `domain`, `shared`; a própria feature por import relativo | outra feature, `mocks`, `layout`, `@core/providers` |
+| todas | `@dsc/web` | caminho direto para `projects/dsc-web-local` |
 
 ## Como usar os tokens
 

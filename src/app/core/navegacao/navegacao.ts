@@ -11,8 +11,21 @@ export interface ItemNavegacao {
   /** Rótulo no Menu lateral. */
   readonly rotuloMenu: string;
   readonly icone: DscIconName;
-  /** Card de acesso na Home (ausente = não aparece na Home). */
-  readonly home?: { readonly titulo: string; readonly descricao: string };
+  /**
+   * Card de acesso na Home (ausente = não aparece na Home).
+   * `ordem`: posição do card, que no Figma é diferente da ordem do menu [FIGMA: 00.01 — Home → Linhas 1–3].
+   */
+  readonly home?: { readonly ordem: number; readonly titulo: string; readonly descricao: string };
+  /** Funcionalidade ainda não implementada: gera uma rota para a tela "Em construção". */
+  readonly emConstrucao?: PaginaEmConstrucao;
+}
+
+/** Dados da tela "Em construção" de uma funcionalidade futura. */
+export interface PaginaEmConstrucao {
+  /** Título da página (pode diferir do rótulo do menu). */
+  readonly titulo: string;
+  /** Referência de design exibida na tela. */
+  readonly origem: string;
 }
 
 export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
@@ -22,24 +35,29 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
     rotuloMenu: 'Meus certificados',
     icone: 'doc-star',
     home: {
+      ordem: 3,
       titulo: 'Meus certificados',
       descricao: 'Consulte a situação e a validade dos certificados emitidos para você.',
     },
+    emConstrucao: { titulo: 'Meus certificados', origem: 'FIGMA: 01.1.01' },
   },
   {
     rota: '/nova-midia-fisica',
     rotuloMenu: 'Nova Mídia Física',
     icone: 'card-shield',
     home: {
+      ordem: 2,
       titulo: 'Solicitar Mídia Física',
       descricao: 'Verifique se precisa de outro token ou cartão antes de solicitar uma nova mídia.',
     },
+    emConstrucao: { titulo: 'Nova Mídia Física', origem: 'FIGMA: 00.02' },
   },
   {
     rota: '/solicitar',
     rotuloMenu: 'Solicitar certificado',
     icone: 'doc-star-in',
     home: {
+      ordem: 1,
       titulo: 'Solicitar Certificado',
       descricao: 'Solicite um certificado em nuvem ou para a mídia física que você já possui.',
     },
@@ -49,69 +67,85 @@ export const ITENS_NAVEGACAO: readonly ItemNavegacao[] = [
     rotuloMenu: 'Acompanhar solicitações',
     icone: 'page-search',
     home: {
+      ordem: 4,
       titulo: 'Acompanhar solicitações',
       descricao: 'Acompanhe seus pedidos e consulte as orientações de ativação.',
     },
+    emConstrucao: { titulo: 'Acompanhar solicitações', origem: 'FIGMA: 07' },
   },
   {
     rota: '/tratar-solicitacoes',
     rotuloMenu: 'Tratar solicitações',
     icone: 'clipboard-check',
     home: {
+      ordem: 5,
       titulo: 'Tratar solicitações',
       descricao: 'Analise os pedidos e registre a decisão de tratamento.',
     },
+    emConstrucao: { titulo: 'Tratamento de solicitações', origem: 'FIGMA: 04' },
   },
   {
     rota: '/historico-auditoria',
     rotuloMenu: 'Histórico e auditoria',
     icone: 'clock-rotate-left',
     home: {
+      ordem: 6,
       titulo: 'Histórico e auditoria',
       descricao: 'Consulte registros e informações para auditoria.',
     },
+    emConstrucao: { titulo: 'Histórico e auditoria', origem: 'FIGMA: 05' },
   },
   {
     rota: '/revogar-certificado',
     rotuloMenu: 'Revogar certificado',
     icone: 'prohibition',
     home: {
+      ordem: 7,
       titulo: 'Revogar certificado',
       descricao: 'Solicite a revogação de um certificado ativo.',
     },
+    emConstrucao: { titulo: 'Revogar certificado', origem: 'FIGMA: 06 / 06.1' },
   },
   {
     rota: '/dashboard',
     rotuloMenu: 'Dashboard',
     icone: 'dashboard',
     home: {
+      ordem: 8,
       titulo: 'Dashboard',
       descricao: 'Visualize indicadores e solicitações que precisam de atenção.',
     },
+    emConstrucao: { titulo: 'Dashboard', origem: 'FIGMA: 10' },
   },
   {
     rota: '/administracao',
     rotuloMenu: 'Administração',
     icone: 'settings',
     home: {
+      ordem: 9,
       titulo: 'Administração',
       descricao: 'Gerencie funcionalidades e cadastros de agentes e autorizadores.',
     },
+    emConstrucao: { titulo: 'Administração', origem: 'FIGMA: 08' },
   },
 ];
 
-/**
- * Ordem dos cards na Home, que no Figma é diferente da ordem do menu.
- * [FIGMA: 00.01 — Home → Linhas 1–3]
- */
-export const ORDEM_HOME: readonly string[] = [
-  '/solicitar',
-  '/nova-midia-fisica',
-  '/meus-certificados',
-  '/acompanhar-solicitacoes',
-  '/tratar-solicitacoes',
-  '/historico-auditoria',
-  '/revogar-certificado',
-  '/dashboard',
-  '/administracao',
+/** Páginas fora do menu lateral que ainda não foram implementadas. */
+export const PAGINAS_FORA_DO_MENU: readonly (PaginaEmConstrucao & { readonly rota: string })[] = [
+  { rota: '/duvidas-frequentes', titulo: 'Perguntas frequentes', origem: 'FIGMA: 09' },
+  { rota: '/ajuda/certificado-em-nuvem', titulo: 'Certificado em nuvem', origem: 'FIGMA: 00.01.A1' },
+  { rota: '/ajuda/midia-fisica', titulo: 'Mídia física: cartão ou token', origem: 'FIGMA: 00.01.A2' },
+];
+
+type ItemHome = ItemNavegacao & { readonly home: NonNullable<ItemNavegacao['home']> };
+
+/** Cards de acesso da Home, já na ordem do Figma. */
+export const CARDS_HOME: readonly ItemHome[] = ITENS_NAVEGACAO.filter((i): i is ItemHome => !!i.home).sort(
+  (a, b) => a.home.ordem - b.home.ordem,
+);
+
+/** Todas as rotas que hoje apontam para a tela "Em construção" (menu + páginas fora do menu). */
+export const ROTAS_EM_CONSTRUCAO: readonly (PaginaEmConstrucao & { readonly rota: string })[] = [
+  ...ITENS_NAVEGACAO.flatMap((i) => (i.emConstrucao ? [{ rota: i.rota, ...i.emConstrucao }] : [])),
+  ...PAGINAS_FORA_DO_MENU,
 ];

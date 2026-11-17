@@ -4,8 +4,8 @@ import {
   DadosCadastrais,
   Elegibilidade,
   ResultadoEnvioSolicitacao,
-} from '@core/models/solicitacao-certificado.models';
-import { SolicitacaoCertificadoApi } from '../solicitacao-certificado.api';
+} from '@domain/certificado/solicitacao-certificado.models';
+import { SolicitacaoCertificadoApi } from '@domain/certificado/solicitacao-certificado.api';
 import { CENARIO_SIMULADO } from './cenario-simulado';
 
 /** Latência simulada, só para os estados de carregamento ficarem visíveis. */

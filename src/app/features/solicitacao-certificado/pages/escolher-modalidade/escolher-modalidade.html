@@ -1,4 +1,4 @@
-<dsc-progress label="Etapa 1 de 3" [value]="33" />
+<dsc-progress [label]="etapa.rotulo" [value]="etapa.valor" />
 
 <div class="pagina__cabecalho">
   <h1 class="pagina__titulo">Solicitar certificado digital</h1>
@@ -21,7 +21,12 @@
       <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
       <div dscCard configuration="radio-button" [checked]="selecionada() === 'nuvem'" (click)="selecionar('nuvem')">
         <div class="modalidade">
-          <dsc-radio name="modalidade" value="nuvem" [checked]="selecionada() === 'nuvem'" (selected)="selecionar($event)">
+          <dsc-radio
+            name="modalidade"
+            value="nuvem"
+            [checked]="selecionada() === 'nuvem'"
+            (selected)="selecionar($event)"
+          >
             Certificado em nuvem
           </dsc-radio>
           <p class="modalidade__descricao">Use o certificado no dispositivo móvel, sem mídia física.</p>

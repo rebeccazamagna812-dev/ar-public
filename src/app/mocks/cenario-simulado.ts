@@ -19,8 +19,6 @@ export const CENARIO_SIMULADO = new InjectionToken<CenarioSimulado>('CENARIO_SIM
   providedIn: 'root',
   factory: () => {
     const valor = new URLSearchParams(inject(DOCUMENT).location.search).get('cenario');
-    return (CENARIOS_SIMULADOS as readonly string[]).includes(valor ?? '')
-      ? (valor as CenarioSimulado)
-      : 'padrao';
+    return (CENARIOS_SIMULADOS as readonly string[]).includes(valor ?? '') ? (valor as CenarioSimulado) : 'padrao';
   },
 });

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DscButton, DscCardAlert } from '@dsc/web';
-import { ITENS_NAVEGACAO, ItemNavegacao, ORDEM_HOME } from '@core/navegacao/navegacao';
+import { CARDS_HOME } from '@core/navegacao/navegacao';
 import { CardAcesso } from '@shared/ui/card-acesso/card-acesso';
 
 /**
@@ -12,11 +12,10 @@ import { CardAcesso } from '@shared/ui/card-acesso/card-acesso';
   selector: 'app-home',
   imports: [RouterLink, DscButton, DscCardAlert, CardAcesso],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'pagina' },
   templateUrl: './home.html',
-  styleUrls: ['../../shared/styles/pagina.css', './home.css'],
+  styleUrl: './home.css',
 })
 export class Home {
-  protected readonly cards = ORDEM_HOME.map((rota) => ITENS_NAVEGACAO.find((i) => i.rota === rota)).filter(
-    (i): i is ItemNavegacao & { home: NonNullable<ItemNavegacao['home']> } => !!i?.home,
-  );
+  protected readonly cards = CARDS_HOME;
 }
