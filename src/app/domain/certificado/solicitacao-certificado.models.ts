@@ -3,7 +3,7 @@
  * Os campos vêm apenas do que está visível no Figma ou escrito na documentação. Nada foi inventado.
  */
 
-/** Modalidades de certificado [DOC: HU01/HU02] [FIGMA: 01.01 — "Certificado em nuvem" / "Certificado para mídia física"]. */
+/** Modalidades de certificado [DOC: HU01/HU02] [FIGMA: 03.01 — "Em nuvem" / "Em mídia física"]. */
 export type ModalidadeCertificado = 'nuvem' | 'midia-fisica';
 
 /**
@@ -51,7 +51,7 @@ export interface DadosCadastrais {
   readonly dataNascimento: string;
 }
 
-/** Retorno de uma solicitação registrada com sucesso [FIGMA: 01.04 — Referência, e-mail do SERPRO]. */
+/** Retorno de uma solicitação registrada com sucesso [FIGMA: 03.N2 / 03.05 — Referência, e-mail do SERPRO]. */
 export interface SolicitacaoRegistrada {
   readonly referencia: string;
   /** E-mail para onde o SERPRO envia a mensagem de validação de identidade. */
@@ -59,7 +59,7 @@ export interface SolicitacaoRegistrada {
 }
 
 /**
- * Motivos que interrompem a jornada [FIGMA: 01.E1–01.E4].
+ * Motivos que interrompem a jornada [FIGMA (fluxo anterior): 01.E1–01.E4, mantidas por decisão de produto].
  * - nao-elegivel: empregado sem elegibilidade à nuvem [DOC: HU02 CA02, HU03c]
  * - certificado-ativo: já existe certificado em nuvem ativo [DOC: HU04]
  * - divergencia-cadastral: divergência entre dados CAIXA e SERPRO [FIGMA: 01.E3]

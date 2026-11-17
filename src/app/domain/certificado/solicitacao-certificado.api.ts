@@ -23,7 +23,7 @@ export abstract class SolicitacaoCertificadoApi {
   /** Verifica se já existe certificado em nuvem ativo para o titular [DOC: HU04] [FIGMA: 01.E2]. */
   abstract possuiCertificadoNuvemAtivo(): Observable<boolean>;
 
-  /** Dados cadastrais do IntegraMais, somente leitura [DOC: HU05] [FIGMA: 01.02]. */
+  /** Dados cadastrais do IntegraMais, somente leitura [DOC: HU05] [FIGMA: 03.N1, 03.04]. */
   abstract obterDadosCadastrais(): Observable<DadosCadastrais>;
 
   /**

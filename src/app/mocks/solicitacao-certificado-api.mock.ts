@@ -13,7 +13,7 @@ const LATENCIA_MS = 400;
 
 /**
  * Implementação SIMULADA da API, sem backend.
- * Os dados de exemplo são os mesmos exibidos no Figma [FIGMA: 01.02, 01.04].
+ * Os dados de exemplo são os mesmos exibidos no Figma [FIGMA: 03.N1, 03.N2].
  * Escolha um cenário pela URL, por exemplo: http://localhost:4200/?cenario=serpro-indisponivel
  */
 @Injectable()
