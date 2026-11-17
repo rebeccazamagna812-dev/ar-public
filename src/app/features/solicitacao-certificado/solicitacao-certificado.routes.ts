@@ -1,7 +1,12 @@
 import { inject } from '@angular/core';
 import { ResolveFn, Router, Routes } from '@angular/router';
 import { INTERRUPCOES, isMotivoInterrupcao } from './pages/interrupcao/interrupcoes';
-import { iniciarJornadaResolver, jornadaNuvemGuard, solicitacaoRegistradaGuard } from './guards/jornada.guards';
+import {
+  iniciarJornadaResolver,
+  jornadaNuvemGuard,
+  solicitacaoRegistradaGuard,
+  triagemConcluidaGuard,
+} from './guards/jornada.guards';
 import { ROTAS_SOLICITACAO, SEGMENTOS_SOLICITACAO } from './solicitacao-certificado.paths';
 import { SolicitacaoCertificadoJornada } from './state/solicitacao-certificado.jornada';
 import { SolicitacaoCertificadoStore } from './state/solicitacao-certificado.store';
@@ -30,9 +35,15 @@ const PAGINAS: Routes = [
     loadComponent: () => import('./pages/escolher-modalidade/escolher-modalidade').then((m) => m.EscolherModalidade),
   },
   {
+    path: SEGMENTOS_SOLICITACAO.modalidades,
+    title: 'Entenda as modalidades',
+    loadComponent: () => import('./pages/entender-modalidades/entender-modalidades').then((m) => m.EntenderModalidades),
+  },
+  {
     path: SEGMENTOS_SOLICITACAO.dadosNuvem,
     title: 'Confira seus dados',
-    canActivate: [jornadaNuvemGuard],
+    // Elegibilidade primeiro: acessar a URL direto sem elegibilidade mostra 01.E1.
+    canActivate: [jornadaNuvemGuard, triagemConcluidaGuard],
     loadComponent: () => import('./pages/conferir-dados/conferir-dados').then((m) => m.ConferirDados),
   },
   {
@@ -53,6 +64,7 @@ const PAGINAS: Routes = [
     // Fora do escopo desta etapa [FIGMA: seção 02 — Solicitação de Certificado em Mídia Física].
     path: SEGMENTOS_SOLICITACAO.midiaFisica,
     title: 'Solicitar certificado em mídia física',
+    canActivate: [triagemConcluidaGuard],
     data: { titulo: 'Solicitar certificado em mídia física', origem: 'FIGMA: seção 02' },
     loadComponent: () => import('@shared/paginas/placeholder/placeholder').then((m) => m.Placeholder),
   },

@@ -1,11 +1,9 @@
-<dsc-progress [label]="etapa.rotulo" [value]="etapa.valor" />
-
-<div class="pagina__cabecalho">
-  <h1 class="pagina__titulo">Solicitar certificado digital</h1>
-  <a dscButton appearance="chromeless" iconLeft="home" routerLink="/">Página principal</a>
-</div>
-
-<p class="pagina__subtitulo" id="modalidade-instrucao">Escolha a modalidade do certificado que deseja solicitar.</p>
+<dsc-title-bar
+  title="Solicitar certificado digital"
+  subtitle="Vamos ajudar você a escolher a modalidade e fazer o pedido certo."
+>
+  <a dscTitleBarAction dscButton appearance="chromeless" iconLeft="home" routerLink="/">Página principal</a>
+</dsc-title-bar>
 
 @if (falhaElegibilidade()) {
   <!-- [PENDENTE] Texto e comportamento na falha da avaliação de elegibilidade (DOC: HU03a MN01) -->
@@ -13,55 +11,62 @@
     Tente novamente mais tarde.
   </dsc-card-alert>
 } @else {
-  <dsc-card-alert [title]="alerta().titulo" aria-live="polite">{{ alerta().texto }}</dsc-card-alert>
+  <dsc-card-alert title="Este pedido é somente do certificado digital">
+    O certificado é sua identidade digital. O cartão e o token são mídias físicas que podem guardá-lo. Este pedido não
+    inclui cartão ou token.
+  </dsc-card-alert>
 
-  <div class="modalidades" role="radiogroup" aria-labelledby="modalidade-instrucao">
-    @if (podeNuvem()) {
-      <!-- Clique no card é atalho de mouse; teclado e leitor de tela usam o <input type="radio"> interno. -->
-      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
-      <div dscCard configuration="radio-button" [checked]="selecionada() === 'nuvem'" (click)="selecionar('nuvem')">
-        <div class="modalidade">
-          <dsc-radio
-            name="modalidade"
-            value="nuvem"
-            [checked]="selecionada() === 'nuvem'"
-            (selected)="selecionar($event)"
-          >
-            Certificado em nuvem
-          </dsc-radio>
-          <p class="modalidade__descricao">Use o certificado no dispositivo móvel, sem mídia física.</p>
-        </div>
-      </div>
-    }
-    @if (podeMidiaFisica()) {
-      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
-      <div
-        dscCard
-        configuration="radio-button"
-        [checked]="selecionada() === 'midia-fisica'"
-        (click)="selecionar('midia-fisica')"
-      >
-        <div class="modalidade">
-          <dsc-radio
-            name="modalidade"
-            value="midia-fisica"
-            [checked]="selecionada() === 'midia-fisica'"
-            (selected)="selecionar($event)"
-          >
-            Certificado para mídia física
-          </dsc-radio>
-          <p class="modalidade__descricao">Certificado em mídia do tipo cartão ou token.</p>
-        </div>
-      </div>
-    }
-  </div>
+  <section class="pagina__secao">
+    <h2 id="pergunta-modalidade" class="dsc-typography-title-small-semibold">
+      Como você deseja utilizar seu certificado?
+    </h2>
+    <app-opcoes-radio
+      nome="modalidade"
+      rotuladoPor="pergunta-modalidade"
+      [opcoes]="opcoesModalidade()"
+      [(selecionada)]="selecionada"
+    />
+  </section>
 }
 
-<div class="pagina__acoes">
-  @if (selecionada()) {
-    <button dscButton type="button" appearance="outline" (click)="limparSelecao()">Voltar</button>
-  }
+<div class="pagina__acoes pagina__acoes--apos-conteudo">
   <button dscButton type="button" appearance="plain" [disabled]="!selecionada()" (click)="continuar()">
     Continuar
   </button>
+  <a dscButton appearance="outline" [routerLink]="rotaModalidades">Entender as diferenças</a>
 </div>
+
+<dsc-modal title="Antes de solicitar seu certificado" [open]="triagemAberta()" (dismiss)="cancelarTriagem()">
+  <p>
+    Para substituir um certificado válido, revogue o anterior antes de fazer outro pedido. Pedir um novo certificado não
+    cancela o anterior.
+  </p>
+  <p>
+    A revogação é definitiva e pode interromper seu acesso até a emissão do novo. Conserve o cartão ou token para
+    reutilizá-lo.
+  </p>
+  <p id="pergunta-situacao">Se você tem autorização para um segundo tipo de certificado, pode manter o atual.</p>
+  <app-opcoes-radio
+    nome="situacao-certificado-anterior"
+    rotuladoPor="pergunta-situacao"
+    [opcoes]="opcoesSituacao"
+    [(selecionada)]="situacao"
+  />
+  <div>
+    <a dscButton appearance="outline" routerLink="/meus-certificados">Consultar meus certificados</a>
+  </div>
+
+  <button dscModalFooter dscButton type="button" appearance="chromeless" (click)="cancelarTriagem()">Cancelar</button>
+  @if (!precisaRevogar()) {
+    <button
+      dscModalFooter
+      dscButton
+      type="button"
+      appearance="plain"
+      [disabled]="!situacao()"
+      (click)="continuarTriagem()"
+    >
+      Continuar
+    </button>
+  }
+</dsc-modal>
